@@ -5,22 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f03f3ede-7000-4b66-932c-b32f1678723e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/JavaFunctionTest/JavaFunctionTest.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/JavaFunctionTest/src/Main.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Shell/Shell.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/StackSort/StackSort.iml" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Shell/src/Main.java" afterPath="$PROJECT_DIR$/src/me/alfod/algorithm/sort/Shell.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/StackSort/src/HashTable/HashNode.java" afterPath="$PROJECT_DIR$/src/me/alfod/datastructure/hash/HashTable/HashNode.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/StackSort/src/HashTable/HashOperate.java" afterPath="$PROJECT_DIR$/src/me/alfod/datastructure/hash/HashTable/HashOperate.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/StackSort/src/HashTable/HashTableOpenAddress.java" afterPath="$PROJECT_DIR$/src/me/alfod/datastructure/hash/HashTable/HashTableOpenAddress.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/StackSort/src/HashTable/HashTableSeparateChaining.java" afterPath="$PROJECT_DIR$/src/me/alfod/datastructure/hash/HashTable/HashTableSeparateChaining.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/StackSort/src/StackSort.java" afterPath="$PROJECT_DIR$/src/me/alfod/algorithm/sort/Stack.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/StackSort/src/Tree/AVLTree.java" afterPath="$PROJECT_DIR$/src/me/alfod/datastructure/tree/Tree/AVLTree.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/StackSort/src/Tree/RedBlackTree.java" afterPath="$PROJECT_DIR$/src/me/alfod/datastructure/tree/Tree/RedBlackTree.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/StackSort/src/Tree/TreeNode.java" afterPath="$PROJECT_DIR$/src/me/alfod/datastructure/tree/Tree/TreeNode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Test/Test.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Algorithm/com/company/ArrayManager.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Algorithm/com/company/DataStructure.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Algorithm/com/company/Main.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/JavaFunctionTest/Main.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Shell/Main.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/StackSort/HashTable/HashNode.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/StackSort/HashTable/HashOperate.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/StackSort/HashTable/HashTableOpenAddress.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/StackSort/HashTable/HashTableSeparateChaining.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/StackSort/StackSort.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/StackSort/Tree/AVLTree.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/StackSort/Tree/RedBlackTree.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/StackSort/Tree/TreeNode.class" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Algorithm.iws" />
@@ -123,21 +121,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Test.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Test/Test.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="1" column="4" lean-forward="true" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
+            <state relative-caret-position="54">
+              <caret line="3" column="5" lean-forward="true" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -1182,12 +1170,20 @@
       <workItem from="1489287077585" duration="93000" />
       <workItem from="1489287249302" duration="131000" />
       <workItem from="1489316876407" duration="2737000" />
-      <workItem from="1489320728492" duration="980000" />
+      <workItem from="1489320728492" duration="1338000" />
     </task>
+    <task id="LOCAL-00001" summary="reengineer">
+      <created>1489321782778</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1489321782778</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="269058000" />
+    <option name="totallyTimeSpent" value="269416000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1246,6 +1242,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="reengineer" />
+    <option name="LAST_COMMIT_MESSAGE" value="reengineer" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1602,8 +1602,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" column="4" lean-forward="true" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
+        <state relative-caret-position="54">
+          <caret line="3" column="5" lean-forward="true" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
           <folding />
         </state>
       </provider>
