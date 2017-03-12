@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Algorithm.iml" filepath="$PROJECT_DIR$/Algorithm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaFunctionTest/JavaFunctionTest.iml" filepath="$PROJECT_DIR$/JavaFunctionTest/JavaFunctionTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Shell/Shell.iml" filepath="$PROJECT_DIR$/Shell/Shell.iml" />
+      <module fileurl="file://$PROJECT_DIR$/StackSort/StackSort.iml" filepath="$PROJECT_DIR$/StackSort/StackSort.iml" />
+    </modules>
+  </component>
+</project>
