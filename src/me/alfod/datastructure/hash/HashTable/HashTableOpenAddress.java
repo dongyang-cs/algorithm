@@ -1,4 +1,4 @@
-package HashTable;
+package me.alfod.datastructure.hash.HashTable;
 
 import java.io.Serializable;
 

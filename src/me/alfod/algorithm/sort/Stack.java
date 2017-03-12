@@ -1,24 +1,20 @@
+package me.alfod.algorithm.sort;
+
 import com.company.ArrayManager;
 
-import java.lang.reflect.Array;
-import java.util.Objects;
-import java.util.Stack;
 
-import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
-
-
-public class StackSort {
+public class Stack {
     private Integer[] ints;
 
 
     public static void main(String[] args) {
-        StackSort stackSort = new StackSort(15);
+        Stack stackSort = new Stack(15);
         stackSort.init();
         stackSort.sort();
 
     }
 
-    public StackSort(Integer intsLenght) {
+    public Stack(Integer intsLenght) {
         final ArrayManager arrayManager = ArrayManager.getInstance();
         this.ints = arrayManager.getArray(intsLenght);
     }

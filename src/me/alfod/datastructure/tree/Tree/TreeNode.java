@@ -1,4 +1,4 @@
-package Tree;
+package me.alfod.datastructure.tree.Tree;
 
 /**
  * Created by Administrator on 2017/2/10.

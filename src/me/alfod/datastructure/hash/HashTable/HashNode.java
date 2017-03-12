@@ -1,4 +1,4 @@
-package HashTable;
+package me.alfod.datastructure.hash.HashTable;
 
 /**
  * Created by Administrator on 2017/2/1.

@@ -1,6 +1,4 @@
-package Tree;
-
-import com.company.ArrayManager;
+package me.alfod.datastructure.tree.Tree;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

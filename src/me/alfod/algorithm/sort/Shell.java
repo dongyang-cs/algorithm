@@ -1,19 +1,10 @@
-/**
+package me.alfod.algorithm.sort; /**
  * Created by Administrator on 2016/11/5.
  */
 
 import com.company.ArrayManager;
 
-public class Main {
-
-
-    public static void main(String[] args) {
-        ArrayManager arrayManager = ArrayManager.getInstance();
-        Integer[] array = arrayManager.getArray(1000000);
-        //arrayManager.arrayPrint(array);
-        //shell(array);
-        com.company.Main.quickSort(array, 0, array.length, 0);
-    }
+public class Shell {
 
     public static void shell(Integer[] array) {
         int[] a = ArrayManager.getInstance().getShellIncrementArrayByName("Sedgewick", array.length);
@@ -37,6 +28,6 @@ public class Main {
         }
 
         //ArrayManager.getInstance().arrayPrint(array);
-        System.out.println("  Shell Count is: " + count);
+        System.out.println("  me.alfod.algorithm.sort.Shell Count is: " + count);
     }
 }
