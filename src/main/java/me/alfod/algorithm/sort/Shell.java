@@ -24,6 +24,7 @@ public class Shell {
                     b[i] = a[i];
                 }
                 return b;
+
             }
         }
 
@@ -31,22 +32,39 @@ public class Shell {
     }
 
 
-    public static Integer[] shell(Integer[] array) {
-        int a[] = getShellIncrementArrayByName("Sedgewick", array.length);
-        int j_tmp, current_in_array;
-        for (int i = a.length - 1; i >= 0; i--) {
-            for (int j = 1; j <= ((array.length - 1) / a[i]); j++) {
-                j_tmp = j;
-                current_in_array = array[j * a[i]];
-                while ((j_tmp - 1) >= 0 && array[(j_tmp - 1) * a[i]] > current_in_array) {
-                    array[j_tmp * a[i]] = array[(j_tmp - 1) * a[i]];
-                    --j_tmp;
+    public static <T extends Comparable<? super T>> T[] shell(T[] inputArray) {
+        return shell(inputArray, true);
+    }
+
+    public static <T extends Comparable<? super T>> T[] shell(T[] inputArray, boolean isAsc) {
+        int sequence[] = getShellIncrementArrayByName("Sedgewick", inputArray.length);
+        int tmpSecondForIndex, currentSequenceElement;
+        T currentValue;
+        boolean order = true;
+        int firstForIndex, secondForIndex;
+        for (firstForIndex = sequence.length - 1; firstForIndex >= 0; firstForIndex--) {
+            currentSequenceElement = sequence[firstForIndex];
+            for (secondForIndex = 1; secondForIndex <= ((inputArray.length - 1) / currentSequenceElement); secondForIndex++) {
+                tmpSecondForIndex = secondForIndex;
+                currentValue = inputArray[secondForIndex * currentSequenceElement];
+
+                while (tmpSecondForIndex > 0 && inputArray[(tmpSecondForIndex - 1) * currentSequenceElement].compareTo(currentValue) > 0) {
+                    inputArray[tmpSecondForIndex * currentSequenceElement] = inputArray[(tmpSecondForIndex - 1) * currentSequenceElement];
+                    --tmpSecondForIndex;
                 }
-                array[j_tmp * a[i]] = current_in_array;
+                inputArray[tmpSecondForIndex * currentSequenceElement] = currentValue;
             }
         }
+        
+        return inputArray;
 
-        return array;
+    }
 
+    public static void main(String[] args) {
+        Integer[] tmps = {1, 3, 2, 6, 3, 5, 0, 9, 4, 8};
+        tmps = Shell.shell(tmps);
+        for (int i = 0; i < tmps.length; i++) {
+            System.out.println(tmps[i]);
+        }
     }
 }
