@@ -9,7 +9,7 @@ public class Shell {
      * @param arrayLength   sorted array`s length
      * @return an increment sequence which length is half of the array`length
      */
-    public static Integer[] getIncrementSequenceByName(String incrementName, int arrayLength) {
+    private static Integer[] getIncrementSequenceByName(String incrementName, int arrayLength) {
         final String defaultSequenceName = "sedgewick";
         switch (incrementName) {
             case "sedgewick": {
@@ -55,7 +55,10 @@ public class Shell {
      *
      * @return sorted array
      */
-    private static <T extends Comparable<? super T>> T[] shell(T[] inputArray, final boolean isAsc, final String sequenceName) {
+    public static <T extends Comparable<? super T>> T[] shell(T[] inputArray, final boolean isAsc, String sequenceName) {
+        if (sequenceName != null) {
+            sequenceName = sequenceName.toLowerCase();
+        }
 
         Integer[] sequence = getIncrementSequenceByName(sequenceName, inputArray.length);
 
