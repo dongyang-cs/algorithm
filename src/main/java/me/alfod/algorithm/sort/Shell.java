@@ -26,11 +26,9 @@ public class Shell {
 
                     sequenceElement = (int) (Math.pow(4, index + 1) - 3 * Math.pow(2, index + 1) + 1);
                     linkedList.add(sequenceElement);
-                    System.out.println(sequenceElement);
 
                     sequenceElement = (int) (9 * Math.pow(4, index) - 9 * Math.pow(2, index) + 1);
                     linkedList.add(sequenceElement);
-                    System.out.println(sequenceElement);
 
                     index++;
                 }
@@ -46,10 +44,21 @@ public class Shell {
     }
 
 
+    /**
+     * @param inputArray array which is going to be sorted
+     * @return sorted array
+     */
     public static <T extends Comparable<? super T>> T[] shell(T[] inputArray) {
         return shell(inputArray, true, "sedgewick");
     }
 
+    /**
+     * @param inputArray  array which is going to be sorted
+     * @param isAsc  order, true: asc  false: desc
+     * @param sequenceName  name of increment sequence, default and recommend is 'sedgewick'
+     *
+     * @return sorted array
+     */
     private static <T extends Comparable<? super T>> T[] shell(T[] inputArray, final boolean isAsc, final String sequenceName) {
 
         Integer[] sequence = getIncrementSequenceByName(sequenceName, inputArray.length);
