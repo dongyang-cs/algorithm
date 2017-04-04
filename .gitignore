@@ -3,3 +3,7 @@
 将删除 .idea/inspectionProfiles/
 .idea
 Algorithm.iml
+src/main/java/me/alfod/test/
+src/main/resources/
+src/test/
+target/

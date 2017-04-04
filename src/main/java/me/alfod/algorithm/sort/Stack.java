@@ -1,77 +1,90 @@
 package me.alfod.algorithm.sort;
 
-public class Stack {
-    private Integer[] ints;
+import me.alfod.test.ArrayManager;
 
-    private void sort() {
-        int dynamicBorder = ints.length - 1;
+
+public class Stack {
+
+    public static <T extends Comparable<? super T>> T[] sort(T[] inputArray) {
+        inputArray = init(inputArray);
+        int tailIndex = inputArray.length - 1;
         int parentNodeIndex, leftNodeIndex, rightNodeIndex, parentNodeTmp;
-        while (dynamicBorder > 0) {
-            swap(0, dynamicBorder);
-            --dynamicBorder;
+        while (tailIndex > 0) {
+            swap(inputArray, 0, tailIndex);
+            --tailIndex;
             parentNodeIndex = 0;
             leftNodeIndex = 1;
             rightNodeIndex = 2;
 
-            while (leftNodeIndex <= dynamicBorder) {
-                if (rightNodeIndex <= dynamicBorder) {
-                    if (ints[parentNodeIndex] >= ints[leftNodeIndex]
-                            && ints[parentNodeIndex] >= ints[rightNodeIndex])
+            while (leftNodeIndex <= tailIndex) {
+                if (rightNodeIndex <= tailIndex) {
+                    if (inputArray[parentNodeIndex].compareTo(inputArray[leftNodeIndex]) >= 0
+                            && inputArray[parentNodeIndex].compareTo(inputArray[rightNodeIndex]) >= 0)
                         break;
 
-                    if (ints[leftNodeIndex] >= ints[rightNodeIndex]
-                            && ints[leftNodeIndex] > ints[parentNodeIndex]) {
-                        swap(leftNodeIndex, parentNodeIndex);
+                    if (inputArray[leftNodeIndex].compareTo(inputArray[rightNodeIndex]) > 0
+                            && inputArray[leftNodeIndex].compareTo(inputArray[parentNodeIndex]) > 0) {
+                        swap(inputArray, leftNodeIndex, parentNodeIndex);
                         parentNodeIndex = leftNodeIndex;
 
-                    } else if (ints[rightNodeIndex] >= ints[leftNodeIndex]
-                            && ints[rightNodeIndex] > ints[parentNodeIndex]) {
-                        swap(rightNodeIndex, parentNodeIndex);
+                    } else if (inputArray[rightNodeIndex].compareTo(inputArray[leftNodeIndex]) > 0
+                            && inputArray[rightNodeIndex].compareTo(inputArray[parentNodeIndex]) > 0) {
+                        swap(inputArray, rightNodeIndex, parentNodeIndex);
                         parentNodeIndex = rightNodeIndex;
                     }
                 } else {
-                    if (ints[leftNodeIndex] > ints[parentNodeIndex]) {
-                        swap(leftNodeIndex, parentNodeIndex);
+                    if (inputArray[leftNodeIndex].compareTo(inputArray[parentNodeIndex]) > 0) {
+                        swap(inputArray, leftNodeIndex, parentNodeIndex);
                         parentNodeIndex = leftNodeIndex;
                     } else break;
                 }
 
-                rightNodeIndex = 2 * parentNodeIndex + 2;
                 leftNodeIndex = 2 * parentNodeIndex + 1;
+                rightNodeIndex = 2 * parentNodeIndex + 2;
+
             }
+        }
+        return inputArray;
+    }
+
+    private static <T extends Comparable<? super T>> void swap(T[] inputArray, Integer pos1, Integer pos2) {
+        T tmp = inputArray[pos1];
+        inputArray[pos1] = inputArray[pos2];
+        inputArray[pos2] = tmp;
+    }
+
+    private static <T extends Comparable<? super T>> void biggerThenSwap(T[] inputArray, Integer actives, Integer passive) {
+        if (inputArray[actives].compareTo(inputArray[passive]) > 0) {
+            swap(inputArray, actives, passive);
         }
     }
 
-    private void swap(Integer pos1, Integer pos2) {
-        int tmp = ints[pos1];
-        ints[pos1] = ints[pos2];
-        ints[pos2] = tmp;
-    }
+    private static <T extends Comparable<? super T>> T[] init(T[] inputArray) {
+        int parentIndex, count = 0, leftNodeIndex, rightNodeIndex;
+        final int LENGTH = inputArray.length;
 
-    private void biggerThenSwap(Integer actives, Integer passive) {
-        if (ints[actives] > ints[passive]) swap(actives, passive);
-    }
-
-    private void init() {
-        Integer parentIndex, count = 0, leftNodeIndex, rightNodeIndex;
-        final int LENGTH = ints.length;
-
-        while (count < Math.log(LENGTH) / Math.log(2)) {
+        while (count < (Math.log(LENGTH) / Math.log(2))) {
             parentIndex = 0;
             leftNodeIndex = 1;
             rightNodeIndex = 2;
 
             while (leftNodeIndex < LENGTH) {
-                biggerThenSwap(leftNodeIndex, parentIndex);
-                if (rightNodeIndex < LENGTH)
-                    biggerThenSwap(rightNodeIndex, parentIndex);
+                biggerThenSwap(inputArray, leftNodeIndex, parentIndex);
+                if (rightNodeIndex < LENGTH) {
+                    biggerThenSwap(inputArray, rightNodeIndex, parentIndex);
+                }
                 ++parentIndex;
-                rightNodeIndex = 2 * parentIndex + 2;
                 leftNodeIndex = 2 * parentIndex + 1;
+                rightNodeIndex = 2 * parentIndex + 2;
             }
             ++count;
         }
+        return inputArray;
+    }
 
+    public static void main(String[] args) {
+        Integer[] integers = {1, 3, 6, 9, 2, 5, 0, 7, 4};
+        ArrayManager.getInstance().arrayPrint(sort(integers));
     }
 
 

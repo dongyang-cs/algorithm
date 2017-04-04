@@ -44,18 +44,17 @@ public class Shell {
      * @param inputArray array which is going to be sorted
      * @return sorted array
      */
-    public static <T extends Comparable<? super T>> T[] shell(T[] inputArray) {
-        return shell(inputArray, true, "sedgewick");
+    public static <T extends Comparable<? super T>> T[] sort(T[] inputArray) {
+        return sort(inputArray, true, "sedgewick");
     }
 
     /**
-     * @param inputArray  array which is going to be sorted
-     * @param isAsc  order, true: asc  false: desc
-     * @param sequenceName  name of increment sequence, default and recommend is 'sedgewick'
-     *
+     * @param inputArray   array which is going to be sorted
+     * @param isAsc        order, true: asc  false: desc
+     * @param sequenceName name of increment sequence, default and recommend is 'sedgewick'
      * @return sorted array
      */
-    public static <T extends Comparable<? super T>> T[] shell(T[] inputArray, final boolean isAsc, String sequenceName) {
+    public static <T extends Comparable<? super T>> T[] sort(T[] inputArray, final boolean isAsc, String sequenceName) {
         if (sequenceName != null) {
             sequenceName = sequenceName.toLowerCase();
         }
@@ -98,7 +97,7 @@ public class Shell {
     public static void main(String[] args) {
         getIncrementSequenceByName("sedgewick", 10000);
 //        Integer[] tmps = {1, 3, 5, 7, 9, 0, 2, 4, 6, 8};
-//        tmps = Shell.shell(tmps);
+//        tmps = Shell.sort(tmps);
 //        for (int i = 0; i < tmps.length; i++) {
 //            System.out.println(tmps[i]);
 //        }
