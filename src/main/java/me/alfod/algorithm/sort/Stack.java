@@ -1,10 +1,12 @@
 package me.alfod.algorithm.sort;
 
-import me.alfod.test.ArrayManager;
-
-
 public class Stack {
 
+    /**
+     * @param inputArray array going to be sorted
+     * @param <T>        extends Comparable
+     * @return sorted array
+     */
     public static <T extends Comparable<? super T>> T[] sort(T[] inputArray) {
         inputArray = init(inputArray);
         int tailIndex = inputArray.length - 1;
@@ -15,6 +17,7 @@ public class Stack {
             parentNodeIndex = 0;
             leftNodeIndex = 1;
             rightNodeIndex = 2;
+
 
             while (leftNodeIndex <= tailIndex) {
                 if (rightNodeIndex <= tailIndex) {
@@ -80,11 +83,6 @@ public class Stack {
             ++count;
         }
         return inputArray;
-    }
-
-    public static void main(String[] args) {
-        Integer[] integers = {1, 3, 6, 9, 2, 5, 0, 7, 4};
-        ArrayManager.getInstance().arrayPrint(sort(integers));
     }
 
 

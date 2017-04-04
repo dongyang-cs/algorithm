@@ -9,10 +9,10 @@ public class Shell {
      * @param arrayLength   sorted array`s length
      * @return an increment sequence which length is half of the array`length
      */
-    private static Integer[] getIncrementSequenceByName(String incrementName, int arrayLength) {
-        final String defaultSequenceName = "sedgewick";
+    private static Integer[] getIncrementSequenceByName(Sequence incrementName, int arrayLength) {
+        final Sequence defaultSequence = Sequence.SEDGEWICK;
         switch (incrementName) {
-            case "sedgewick": {
+            case SEDGEWICK: {
                 int sequenceElement = 0, index = 1;
                 final int quarterLength = arrayLength / 4;
 
@@ -28,24 +28,22 @@ public class Shell {
 
                     index++;
                 }
-                Integer[] sequence = linkedList.toArray(new Integer[linkedList.size()]);
-                return sequence;
+                return linkedList.toArray(new Integer[linkedList.size()]);
 
             }
             default: {
-                return getIncrementSequenceByName(defaultSequenceName, arrayLength);
+                return getIncrementSequenceByName(defaultSequence, arrayLength);
             }
         }
 
     }
-
 
     /**
      * @param inputArray array which is going to be sorted
      * @return sorted array
      */
     public static <T extends Comparable<? super T>> T[] sort(T[] inputArray) {
-        return sort(inputArray, true, "sedgewick");
+        return sort(inputArray, true, Sequence.SEDGEWICK);
     }
 
     /**
@@ -54,12 +52,8 @@ public class Shell {
      * @param sequenceName name of increment sequence, default and recommend is 'sedgewick'
      * @return sorted array
      */
-    public static <T extends Comparable<? super T>> T[] sort(T[] inputArray, final boolean isAsc, String sequenceName) {
-        if (sequenceName != null) {
-            sequenceName = sequenceName.toLowerCase();
-        }
-
-        Integer[] sequence = getIncrementSequenceByName(sequenceName, inputArray.length);
+    public static <T extends Comparable<? super T>> T[] sort(T[] inputArray, final boolean isAsc, Sequence sequenceName) {
+        Integer[] sequence = getIncrementSequenceByName(Sequence.SEDGEWICK, inputArray.length);
 
         int tmpSecondForIndex, currentSequenceElement;
         T currentValue;
@@ -94,12 +88,13 @@ public class Shell {
 
     }
 
-    public static void main(String[] args) {
-        getIncrementSequenceByName("sedgewick", 10000);
-//        Integer[] tmps = {1, 3, 5, 7, 9, 0, 2, 4, 6, 8};
-//        tmps = Shell.sort(tmps);
-//        for (int i = 0; i < tmps.length; i++) {
-//            System.out.println(tmps[i]);
-//        }
+    /**
+     * increment sequence of shell, default and recommended is sedgewick
+     */
+    public enum Sequence {
+        /**
+         * sedgewick is turned out to be the most efficient sequence in practice
+         */
+        SEDGEWICK
     }
 }
