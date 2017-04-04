@@ -1,9 +1,5 @@
 package me.alfod.algorithm.sort;
 
-/**
- * Created by Arvin Alfod on 2016/11/5.
- */
-
 import java.util.LinkedList;
 import java.util.List;
 
