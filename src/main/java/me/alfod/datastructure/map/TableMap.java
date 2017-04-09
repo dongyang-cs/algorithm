@@ -1,4 +1,4 @@
-package me.alfod.datastructure.hash.HashTable;
+package me.alfod.datastructure.map;
 
 import me.alfod.utils.Prime;
 

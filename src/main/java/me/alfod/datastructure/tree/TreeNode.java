@@ -1,19 +1,19 @@
-package me.alfod.datastructure.tree.Tree;
+package me.alfod.datastructure.tree;
 
 /**
  * Created by Administrator on 2017/2/10.
  */
-public class TreeNode {
-    private TreeNode right;
-    private TreeNode left;
-    private Integer value;
+public class TreeNode<V extends Comparable<? super V>> {
+    private TreeNode<V> right;
+    private TreeNode<V> left;
+    private V value;
 
-    public TreeNode(Integer value) {
+    public TreeNode(V value) {
         this.value = value;
     }
 
 
-    public TreeNode getRight() {
+    public TreeNode<V> getRight() {
         return right;
     }
 
@@ -21,7 +21,7 @@ public class TreeNode {
         this.right = right;
     }
 
-    public TreeNode getLeft() {
+    public TreeNode<V> getLeft() {
         return left;
     }
 
@@ -29,29 +29,29 @@ public class TreeNode {
         this.left = left;
     }
 
-    public Integer getRightValue() {
+    public V getRightValue() {
         if (right != null) return right.value;
         else return null;
     }
 
-    public void setRightValue(Integer integer) {
-        setRight(new TreeNode(integer));
+    public void setRightValue(V integer) {
+        setRight(new TreeNode<>(integer));
     }
 
-    public Integer getLeftValue() {
+    public V getLeftValue() {
         if (left != null) return left.value;
         else return null;
     }
 
-    public void setLeftValue(Integer integer) {
-        setLeft(new TreeNode(integer));
+    public void setLeftValue(V integer) {
+        setLeft(new TreeNode<>(integer));
     }
 
-    public Integer getValue() {
+    public V getValue() {
         return value;
     }
 
-    public void setValue(Integer value) {
+    public void setValue(V value) {
         this.value = value;
     }
 

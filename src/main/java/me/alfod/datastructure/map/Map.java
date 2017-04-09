@@ -1,4 +1,4 @@
-package me.alfod.datastructure.hash.HashTable;
+package me.alfod.datastructure.map;
 
 /**
  * Created by Administrator on 2017/2/4.
