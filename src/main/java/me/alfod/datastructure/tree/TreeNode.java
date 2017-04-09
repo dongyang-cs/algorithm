@@ -1,8 +1,6 @@
 package me.alfod.datastructure.tree;
 
-/**
- * Created by Administrator on 2017/2/10.
- */
+
 public class TreeNode<V extends Comparable<? super V>> {
     private TreeNode<V> right;
     private TreeNode<V> left;

@@ -41,31 +41,6 @@ public class AVL<V extends Comparable<? super V>> extends BaseTree {
         }
     }
 
-    private TreeNode rudeInit(V[] integers) {
-        final TreeNode root = new TreeNode<>((V) getCenterValue(integers));
-        TreeNode<V> tmpNode;
-        for (V integer : integers) {
-            tmpNode = root;
-            while (true) {
-                if (integer.compareTo(tmpNode.getValue()) > 0) {
-                    if (tmpNode.getLeft() != null) {
-                        tmpNode = tmpNode.getLeft();
-                    } else {
-                        tmpNode.setLeft(new TreeNode(integer));
-                        break;
-                    }
-                } else if (integer.compareTo(tmpNode.getValue()) < 0) {
-                    if (tmpNode.getRight() != null)
-                        tmpNode = tmpNode.getRight();
-                    else {
-                        tmpNode.setRight(new TreeNode(integer));
-                        break;
-                    }
-                } else break;
-            }
-        }
-        return root;
-    }
 
     public TreeNode balanceInit(Integer[] integers) {
         integers = Quick.sort(integers);
@@ -91,6 +66,5 @@ public class AVL<V extends Comparable<? super V>> extends BaseTree {
         }
         return node;
     }
-
-
+    
 }

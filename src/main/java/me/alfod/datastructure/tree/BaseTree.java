@@ -182,7 +182,6 @@ public abstract class BaseTree<V extends Comparable<? super V>> {
     private int log(int a, int b) {
         return (int) (Math.log(a) / Math.log(b));
     }
-    //endregion
 
 
 }

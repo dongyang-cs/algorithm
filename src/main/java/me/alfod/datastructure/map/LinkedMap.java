@@ -1,5 +1,7 @@
 package me.alfod.datastructure.map;
 
+import me.alfod.utils.Prime;
+
 import java.io.Serializable;
 
 /**
@@ -21,6 +23,7 @@ public class LinkedMap<Key extends Serializable, Value> extends BaseHash<Key, Va
         if (nodes[index] == null) {
             nodes[index] = new HashNode<>(key, value);
         } else {
+            int count = 0;
             HashNode<Key, Value> node = table[index];
             while (node.getNext() != null) {
                 if (node.getKey().equals(key)) {
@@ -28,11 +31,15 @@ public class LinkedMap<Key extends Serializable, Value> extends BaseHash<Key, Va
                     return;
                 }
                 node = node.getNext();
+                count++;
             }
             if (node.getKey().equals(key)) {
                 node.setValue(value);
             } else {
                 node.setNext(new HashNode<>(key, value));
+            }
+            if (count > Math.sqrt(table.length)) {
+                extend();
             }
         }
     }
@@ -43,10 +50,20 @@ public class LinkedMap<Key extends Serializable, Value> extends BaseHash<Key, Va
 
     }
 
-    private void extend(HashNode<Key, Value> hashNode) {
+    @SuppressWarnings("unchecked")
+    private HashNode<Key, Value>[] extend(HashNode<Key, Value>[] hashNodes) {
+        HashNode<Key, Value>[] newTable = new HashNode[Prime.getNext(2 * hashNodes.length)];
         for (HashNode<Key, Value> node : table) {
-
+            while (node != null) {
+                add(node.getKey(), node.getValue(), newTable);
+                node = node.getNext();
+            }
         }
+        return newTable;
+    }
+
+    private void extend() {
+        table = extend(table);
     }
 
     @Override

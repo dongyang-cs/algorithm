@@ -1,8 +1,6 @@
 package me.alfod.datastructure.map;
 
-/**
- * Created by Administrator on 2017/2/1.
- */
+
 public class HashNode<Key, Value> {
     private HashNode<Key, Value> next;
     private Key key;
