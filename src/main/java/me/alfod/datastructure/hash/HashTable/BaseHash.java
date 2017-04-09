@@ -5,14 +5,16 @@ package me.alfod.datastructure.hash.HashTable;
  */
 public abstract class BaseHash<Key, Value> {
     protected final int defaultLength = 11;
+    private final int hashLengthLimit = 10;
     protected HashNode<Key, Value>[] table;
 
     protected final long hash(Key key) {
         if (key instanceof String) {
             int address = 0;
-            key.hashCode();
+
             char[] chars = ((String) key).toCharArray();
-            for (int i = 0; i < chars.length; i++) {
+            int limit = (hashLengthLimit > chars.length ? chars.length : hashLengthLimit);
+            for (int i = 0; i < limit; i++) {
                 address += chars[i] * (32 << i);
             }
             return Math.abs(address);
