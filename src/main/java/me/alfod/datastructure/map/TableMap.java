@@ -4,9 +4,7 @@ import me.alfod.utils.Prime;
 
 import java.io.Serializable;
 
-/**
- * Created by Administrator on 2017/2/1.
- */
+
 public class TableMap<Key extends Serializable, Value> extends BaseHash<Key, Value> implements Map<Key, Value> {
 
     @SuppressWarnings("unchecked")

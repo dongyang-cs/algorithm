@@ -4,9 +4,6 @@ import me.alfod.utils.Prime;
 
 import java.io.Serializable;
 
-/**
- * Created by Administrator on 2017/1/30.
- */
 
 public class LinkedMap<Key extends Serializable, Value> extends BaseHash<Key, Value> implements Map<Key, Value> {
 
