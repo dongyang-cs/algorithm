@@ -4,14 +4,42 @@ package me.alfod.datastructure.hash.HashTable;
  * Created by Administrator on 2017/2/1.
  */
 public class HashNode<Key, Value> {
-    public HashNode<Key, Value> next;
-    public Key key;
-    public Value value;
+    private HashNode<Key, Value> next;
+    private Key key;
+    private Value value;
     private boolean active = true;
 
     public HashNode(Key key, Value value) {
         this.key = key;
         this.value = value;
+    }
+
+    public HashNode<Key, Value> getNext() {
+        return next;
+    }
+
+    public void setNext(HashNode<Key, Value> next) {
+        this.next = next;
+    }
+
+    public Key getKey() {
+        return key;
+    }
+
+    public void setKey(Key key) {
+        this.key = key;
+    }
+
+    public Value getValue() {
+        return value;
+    }
+
+    public void setValue(Value value) {
+        this.value = value;
+    }
+
+    public boolean isActive() {
+        return active;
     }
 
     public boolean getActive() {
