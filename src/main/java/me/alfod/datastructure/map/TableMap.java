@@ -4,8 +4,7 @@ import me.alfod.utils.Prime;
 
 import java.io.Serializable;
 
-
-public class TableMap<Key extends Serializable, Value> extends BaseHash<Key, Value> implements Map<Key, Value> {
+public class TableMap<Key extends Serializable, Value> extends BaseHash<Key, Value> {
 
     @SuppressWarnings("unchecked")
     public TableMap() {
@@ -19,7 +18,7 @@ public class TableMap<Key extends Serializable, Value> extends BaseHash<Key, Val
         Integer index;
         for (HashNode<Key, Value> node : table) {
             if (node != null && node.getActive()) {
-                index = findNext(node.getKey(), newTable);
+                index = findNext(node.getK(), newTable);
                 if (index != null) {
                     newTable[index] = node;
                 } else {
@@ -39,7 +38,7 @@ public class TableMap<Key extends Serializable, Value> extends BaseHash<Key, Val
     public Value get(Key key) {
         int tmpIndex = findKey(key);
         if (table[tmpIndex] == null || !table[tmpIndex].getActive()) return null;
-        else return table[tmpIndex].getValue();
+        else return table[tmpIndex].getV();
     }
 
     @Override
@@ -54,8 +53,8 @@ public class TableMap<Key extends Serializable, Value> extends BaseHash<Key, Val
         if (table[index] == null) {
             table[index] = new HashNode<>(key, value);
         } else {
-            table[index].setKey(key);
-            table[index].setValue(value);
+            table[index].setK(key);
+            table[index].setV(value);
             table[index].active();
         }
 
@@ -120,7 +119,7 @@ public class TableMap<Key extends Serializable, Value> extends BaseHash<Key, Val
         for (int i = 1; i < halfLength; i++) {
             localIndex += i * i;
             if (nodes[localIndex] == null
-                    || nodes[localIndex].getKey().equals(key)) {
+                    || nodes[localIndex].getK().equals(key)) {
                 return localIndex;
             }
         }

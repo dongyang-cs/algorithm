@@ -1,12 +1,14 @@
 package me.alfod.datastructure.map;
 
+/**
+ * Created by Administrator on 2017/2/4.
+ */
+public interface Map<K, V> {
+    void add(K k, V v);
 
-public interface Map<Key, Value> {
-    void add(Key key, Value value);
+    V get(K k);
 
-    Value get(Key key);
+    void del(K k);
 
-    void del(Key key);
-
-    void set(Key key, Value value);
+    void set(K k, V v);
 }

@@ -4,12 +4,20 @@ package me.alfod.datastructure.tree;
 public class TreeNode<V extends Comparable<? super V>> {
     private TreeNode<V> right;
     private TreeNode<V> left;
+    private TreeNode<V> parent;
     private V value;
 
     public TreeNode(V value) {
         this.value = value;
     }
 
+    public TreeNode<V> getParent() {
+        return parent;
+    }
+
+    public void setParent(TreeNode<V> parent) {
+        this.parent = parent;
+    }
 
     public TreeNode<V> getRight() {
         return right;
@@ -32,8 +40,8 @@ public class TreeNode<V extends Comparable<? super V>> {
         else return null;
     }
 
-    public void setRightValue(V integer) {
-        setRight(new TreeNode<>(integer));
+    public void setRightValue(V value) {
+        setRight(new TreeNode<>(value));
     }
 
     public V getLeftValue() {
@@ -41,8 +49,8 @@ public class TreeNode<V extends Comparable<? super V>> {
         else return null;
     }
 
-    public void setLeftValue(V integer) {
-        setLeft(new TreeNode<>(integer));
+    public void setLeftValue(V value) {
+        setLeft(new TreeNode<>(value));
     }
 
     public V getValue() {

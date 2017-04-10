@@ -1,43 +1,39 @@
 package me.alfod.datastructure.map;
 
 
-public class HashNode<Key, Value> {
-    private HashNode<Key, Value> next;
-    private Key key;
-    private Value value;
+public class HashNode<K, V> {
+    private HashNode<K, V> next;
+    private K k;
+    private V v;
     private boolean active = true;
 
-    public HashNode(Key key, Value value) {
-        this.key = key;
-        this.value = value;
+    public HashNode(K k, V v) {
+        this.k = k;
+        this.v = v;
     }
 
-    public HashNode<Key, Value> getNext() {
+    public HashNode<K, V> getNext() {
         return next;
     }
 
-    public void setNext(HashNode<Key, Value> next) {
+    public void setNext(HashNode<K, V> next) {
         this.next = next;
     }
 
-    public Key getKey() {
-        return key;
+    public K getK() {
+        return k;
     }
 
-    public void setKey(Key key) {
-        this.key = key;
+    public void setK(K k) {
+        this.k = k;
     }
 
-    public Value getValue() {
-        return value;
+    public V getV() {
+        return v;
     }
 
-    public void setValue(Value value) {
-        this.value = value;
-    }
-
-    public boolean isActive() {
-        return active;
+    public void setV(V v) {
+        this.v = v;
     }
 
     public boolean getActive() {
@@ -58,8 +54,8 @@ public class HashNode<Key, Value> {
 
     @Override
     public String toString() {
-        return "TreeNode{ key= " + key +
-                ", value= " + value +
+        return "TreeNode{ k= " + k +
+                ", v= " + v +
                 ", active= " + active + " }";
     }
 }
