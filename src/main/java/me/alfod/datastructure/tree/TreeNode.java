@@ -5,6 +5,17 @@ public class TreeNode<V extends Comparable<? super V>> {
     private TreeNode<V> right;
     private TreeNode<V> left;
     private TreeNode<V> parent;
+    //true left, false right
+    private boolean position;
+
+    public boolean isPosition() {
+        return position;
+    }
+
+    public void setPosition(boolean position) {
+        this.position = position;
+    }
+
     private V value;
 
     public TreeNode(V value) {
@@ -40,18 +51,13 @@ public class TreeNode<V extends Comparable<? super V>> {
         else return null;
     }
 
-    public void setRightValue(V value) {
-        setRight(new TreeNode<>(value));
-    }
+
 
     public V getLeftValue() {
         if (left != null) return left.value;
         else return null;
     }
 
-    public void setLeftValue(V value) {
-        setLeft(new TreeNode<>(value));
-    }
 
     public V getValue() {
         return value;

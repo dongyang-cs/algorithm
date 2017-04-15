@@ -10,18 +10,21 @@ public abstract class BaseTree<V extends Comparable<? super V>> implements Tree<
         return getHeight(node, 1);
     }
 
-    protected static int getHeight(TreeNode node, int i) {
-        if (node == null || node.getValue() == null) {
-            return 0;
-        }
-        if (node.getRight() == null && node.getLeft() == null) return i;
-        int rightHeight = 0, leftHeight = 0;
-        if (node.getRight() != null)
-            rightHeight = getHeight(node.getRight(), ++i);
-        if (node.getLeft() != null)
-            leftHeight = getHeight(node.getLeft(), ++i);
+    protected static int getHeight(TreeNode node, final int height) {
+        if (node == null) return height - 1;
+        int rightHeight = getHeight(node.getRight(), height + 1);
+        int leftHeight = getHeight(node.getLeft(), height + 1);
         return rightHeight > leftHeight ? rightHeight : leftHeight;
 
+    }
+
+    public static void main(String[] args) {
+        TreeNode<Integer> i = new TreeNode<>(1);
+        TreeNode<Integer> j = new TreeNode<>(2);
+        TreeNode<Integer> k = new TreeNode<>(2);
+        i.setRight(j);
+        j.setLeft(k);
+        System.out.println(getHeight(i));
     }
 
     protected TreeNode<V> leftRotate(TreeNode<V> node) {
@@ -31,11 +34,15 @@ public abstract class BaseTree<V extends Comparable<? super V>> implements Tree<
         return head;
     }
 
-    protected TreeNode<V> rightROtate(TreeNode<V> node) {
-        TreeNode<V> head = node.getLeft();
-        node.setLeft(head.getRight());
-        head.setRight(node);
-        return head;
+    protected TreeNode<V> rightRotate(TreeNode<V> node) {
+        if(node.getLeft()!=null) {
+            TreeNode<V> head = node.getLeft();
+            node.setLeft(head.getRight());
+            head.setRight(node);
+            return head;
+        }else{
+            return node;
+        }
     }
 
     @SuppressWarnings("unchecked")

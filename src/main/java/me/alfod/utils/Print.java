@@ -12,11 +12,11 @@ import java.util.List;
  */
 public class Print {
 
-    private static void print(Object o) {
+    public static void print(Object o) {
         System.out.print(o);
     }
 
-    private static void println(Object[] o) {
+    public static void println(Object[] o) {
         println();
         print("Array[");
         for (int i = 0; i < o.length; i++) {
@@ -28,19 +28,19 @@ public class Print {
         println();
     }
 
-    private static void println(Object o) {
+    public static void println(Object o) {
         System.out.println(o);
     }
 
-    private static void println() {
+    public static void println() {
         System.out.println();
     }
 
-    protected static String getBlank(int blankNumber) {
+    public static String getBlank(int blankNumber) {
         return getDuplicateString(' ', blankNumber);
     }
 
-    protected static String getDuplicateString(char c, int count) {
+    public static String getDuplicateString(char c, int count) {
         if (count < 0) count = 0;
         char[] chars = new char[count];
         for (int i = 0; i < count; i++) {
@@ -50,7 +50,7 @@ public class Print {
         return new String(chars);
     }
 
-    public <V extends Comparable<? super V>> void print(TreeNode<V> root) {
+    public static <V extends Comparable<? super V>> void print(TreeNode<V> root) {
         List<TreeNode<V>> currentNodes = new ArrayList<>();
         currentNodes.add(root);
         List<TreeNode<V>> lastNodes = new ArrayList<>();

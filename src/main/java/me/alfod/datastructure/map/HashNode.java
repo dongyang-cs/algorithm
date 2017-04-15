@@ -58,4 +58,27 @@ public class HashNode<K, V> {
                 ", v= " + v +
                 ", active= " + active + " }";
     }
+
+    @Override
+    public int hashCode() {
+        if (k instanceof String) {
+            int address = 0;
+            int hashLengthLimit = 12;
+            char[] chars = ((String) k).toCharArray();
+            int limit = (hashLengthLimit > chars.length ? chars.length : hashLengthLimit);
+            for (int i = 0; i < limit; i++) {
+                address += chars[i] * (32 << i);
+            }
+            return Math.abs(address);
+        } else if (k instanceof Integer) {
+            return Math.abs((Integer) k);
+        } else if (k instanceof Boolean) {
+            if ((Boolean) k) return 0;
+            else return 1;
+        } else if (k instanceof Long) {
+            return Math.abs(((Long) k).intValue());
+        } else {
+            return Math.abs(k.hashCode());
+        }
+    }
 }
