@@ -21,7 +21,65 @@ public class AVLTree<V extends Comparable<? super V>> extends BaseTree<V> {
 
     @Override
     public void del(V v) {
+        TreeNode<V> node = root;
+        TreeNode<V> tmp;
+        while (true) {
+            if (node == null) {
+                break;
+            }
+            if (node.getValue().compareTo(v) > 0) {
+                node = node.getLeft();
+                continue;
+            }
+            if (node.getValue().compareTo(v) < 0) {
+                node = node.getRight();
+                continue;
+            }
+            //when node`s value is equal to v, replace the node`s right child`s most-left leave
+            if (getHeight(node.getLeft()) >= getHeight(node.getRight())) {
+                tmp = node.getLeft();
+                if (tmp == null) {
+                    node.getParent().replace(node, null);
+                    checkBalance(node.getParent().getParent());
+                    return;
+                }
+                while (true) {
+                    if (tmp.getRight() == null) {
+                        node.setValue(tmp.getValue());
+                        tmp.getParent().replace(tmp, null);
+                        checkBalance(tmp.getParent().getRight());
+                        return;
+                    }
+                    tmp = tmp.getRight();
 
+                }
+            } else {
+                tmp = node.getRight();
+                while (true) {
+                    if (tmp.getLeft() == null) {
+                        node.setValue(tmp.getValue());
+                        tmp.getParent().replace(tmp, null);
+                        checkBalance(tmp.getParent().getRight());
+                        return;
+                    }
+                   tmp = tmp.getLeft();
+
+                }
+            }
+
+
+        }
+    }
+
+    private TreeNode<V> del(TreeNode<V> node, V v) {
+        if (node == null) {
+            return null;
+        }
+        if (node.getValue().compareTo(v) == 0) {
+
+        }
+
+        return null;
     }
 
     @Override
@@ -76,6 +134,9 @@ public class AVLTree<V extends Comparable<? super V>> extends BaseTree<V> {
         }
     }
 
+    /**
+     * @param node node should be parent of the node whose son changed
+     */
     private void checkBalance(TreeNode<V> node) {
         if (node == null) {
             return;

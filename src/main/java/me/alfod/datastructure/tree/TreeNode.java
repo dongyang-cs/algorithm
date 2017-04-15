@@ -10,8 +10,18 @@ public class TreeNode<V extends Comparable<? super V>> {
     public TreeNode(V value) {
         this.value = value;
     }
-    public TreeNode(){
 
+    public TreeNode() {
+
+    }
+
+    public void replace(TreeNode<V> old, TreeNode<V> now) {
+        if (this.getLeft() == old) {
+            this.setLeft(now);
+        }
+        if (this.getRight() == old) {
+            this.setRight(now);
+        }
     }
 
     public TreeNode<V> getParent() {
@@ -26,9 +36,9 @@ public class TreeNode<V extends Comparable<? super V>> {
         return right;
     }
 
-    public void setRight(TreeNode<V> right) throws RuntimeException{
+    public void setRight(TreeNode<V> right) throws RuntimeException {
         this.right = right;
-        if (right != null ) {
+        if (right != null) {
             right.setParent(this);
         }
     }
