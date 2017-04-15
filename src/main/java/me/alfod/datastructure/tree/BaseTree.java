@@ -6,11 +6,11 @@ package me.alfod.datastructure.tree;
 public abstract class BaseTree<V extends Comparable<? super V>> implements Tree<V> {
 
 
-    public static int getHeight(TreeNode node) {
+    public static int getHeight(final TreeNode node) {
         return getHeight(node, 1);
     }
 
-    protected static int getHeight(TreeNode node, final int height) {
+    protected static int getHeight(final TreeNode node, final int height) {
         if (node == null) return height - 1;
         int rightHeight = getHeight(node.getRight(), height + 1);
         int leftHeight = getHeight(node.getLeft(), height + 1);
@@ -18,31 +18,22 @@ public abstract class BaseTree<V extends Comparable<? super V>> implements Tree<
 
     }
 
-    public static void main(String[] args) {
-        TreeNode<Integer> i = new TreeNode<>(1);
-        TreeNode<Integer> j = new TreeNode<>(2);
-        TreeNode<Integer> k = new TreeNode<>(2);
-        i.setRight(j);
-        j.setLeft(k);
-        System.out.println(getHeight(i));
-    }
-
-    protected TreeNode<V> leftRotate(TreeNode<V> node) {
+    protected TreeNode<V> rightReduce(TreeNode<V> node) {
         TreeNode<V> head = node.getRight();
+        head.setParent(node.getParent());
+
         node.setRight(head.getLeft());
         head.setLeft(node);
         return head;
     }
 
-    protected TreeNode<V> rightRotate(TreeNode<V> node) {
-        if(node.getLeft()!=null) {
-            TreeNode<V> head = node.getLeft();
-            node.setLeft(head.getRight());
-            head.setRight(node);
-            return head;
-        }else{
-            return node;
-        }
+    protected TreeNode<V> leftReduce(TreeNode<V> node) {
+        TreeNode<V> head = node.getLeft();
+        head.setParent(node.getParent());
+
+        node.setLeft(head.getRight());
+        head.setRight(node);
+        return head;
     }
 
     @SuppressWarnings("unchecked")

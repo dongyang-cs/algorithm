@@ -5,21 +5,13 @@ public class TreeNode<V extends Comparable<? super V>> {
     private TreeNode<V> right;
     private TreeNode<V> left;
     private TreeNode<V> parent;
-    //true left, false right
-    private boolean position;
-
-    public boolean isPosition() {
-        return position;
-    }
-
-    public void setPosition(boolean position) {
-        this.position = position;
-    }
-
     private V value;
 
     public TreeNode(V value) {
         this.value = value;
+    }
+    public TreeNode(){
+
     }
 
     public TreeNode<V> getParent() {
@@ -34,30 +26,24 @@ public class TreeNode<V extends Comparable<? super V>> {
         return right;
     }
 
-    public void setRight(TreeNode right) {
+    public void setRight(TreeNode<V> right) throws RuntimeException{
         this.right = right;
+        if (right != null ) {
+            right.setParent(this);
+        }
     }
 
     public TreeNode<V> getLeft() {
         return left;
     }
 
-    public void setLeft(TreeNode left) {
+    public void setLeft(TreeNode<V> left) throws RuntimeException {
         this.left = left;
+        if (left != null) {
+            left.setParent(this);
+        }
+
     }
-
-    public V getRightValue() {
-        if (right != null) return right.value;
-        else return null;
-    }
-
-
-
-    public V getLeftValue() {
-        if (left != null) return left.value;
-        else return null;
-    }
-
 
     public V getValue() {
         return value;

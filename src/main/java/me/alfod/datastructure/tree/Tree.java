@@ -6,6 +6,8 @@ package me.alfod.datastructure.tree;
 public interface Tree<V> {
     void add(V v);
 
+    void add(V[] v);
+
     void del(V v);
 
     boolean contain(V v);

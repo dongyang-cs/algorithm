@@ -1,15 +1,18 @@
 package me.alfod.datastructure.tree;
 
-import me.alfod.utils.Print;
-
 public class AVLTree<V extends Comparable<? super V>> extends BaseTree<V> {
     private TreeNode<V> root;
 
-    public AVLTree(V[] values) {
-        add(values);
-    }
 
     public AVLTree() {
+    }
+
+    public AVLTree(V v) {
+        root = new TreeNode<>(v);
+    }
+
+    public AVLTree(V[] v) {
+        add(v);
     }
 
     public TreeNode<V> getRoot() {
@@ -22,86 +25,101 @@ public class AVLTree<V extends Comparable<? super V>> extends BaseTree<V> {
     }
 
     @Override
-    public boolean contain(V v) {
-        return true;
+    public boolean contain(final V v) {
+        return contain(root, v);
     }
 
-    public void add(V value) {
-        if(root==null){
-            root=new TreeNode<>(value);
+    private boolean contain(final TreeNode<V> node, final V v) {
+
+        return node != null
+                && (node.getValue().compareTo(v) == 0
+                || contain(node.getLeft(), v)
+                || contain(node.getRight(), v));
+
+    }
+
+    public void add(final V value) {
+        if (root == null) {
+            root = new TreeNode<>(value);
             return;
         }
         TreeNode<V> node = root;
-        TreeNode<V> valueNode = new TreeNode<>(value);
+        final TreeNode<V> valueNode = new TreeNode<>(value);
         while (true) {
             if (value.compareTo(node.getValue()) > 0) {
-                if (node.getRight() != null)
+                if (node.getRight() != null) {
                     node = node.getRight();
-                else {
+                    continue;
+                } else {
                     node.setRight(valueNode);
-                    valueNode.setParent(node);
-                    valueNode.setPosition(false);
                     checkBalance(node.getParent());
-                    break;
+                    return;
                 }
             } else if (value.compareTo(node.getValue()) < 0) {
-                if (node.getLeft() != null)
+                if (node.getLeft() != null) {
                     node = node.getLeft();
-                else {
+                    continue;
+                } else {
                     node.setLeft(valueNode);
-                    valueNode.setParent(node);
-                    valueNode.setPosition(true);
                     checkBalance(node.getParent());
-                    break;
+                    return;
                 }
-            } else{
-                break;
             }
+            return;
         }
 
+    }
+
+    public void add(final V[] values) {
+        for (V v : values) {
+            add(v);
+        }
     }
 
     private void checkBalance(TreeNode<V> node) {
-        if(node==null){
+        if (node == null) {
             return;
         }
-        while (node!=null) {
-            int leftHeight = getHeight(node.getLeft());
-            int rightHeight = getHeight(node.getRight());
-            if ( rightHeight-leftHeight > 1) {
-                if (node.getParent() != null) {
-                    if (node.isPosition()) {
-                        node.getParent().setLeft(leftRotate(node));
-                    } else {
-                        node.getParent().setRight(leftRotate(node));
-                    }
-                } else {
-                    leftRotate(node);
-                }
-                node = node.getParent();
-                continue;
+        while (true) {
+            //when node is root, need special treatment
+            if (node.getParent() == null) {
+                root = getBalance(node);
+                return;
             }
-            if (leftHeight - rightHeight > 1) {
-                if (node.getParent() != null) {
-                    if (node.isPosition()) {
-                        node.getParent().setLeft(rightRotate(node));
-                    } else {
-                        node.getParent().setRight(rightRotate(node));
-                    }
-                } else {
-                    rightRotate(node);
-                }
-                node = node.getParent();
-                continue;
-            }
-            break;
+            node = node.getParent();
+
+            node.setRight(getBalance(node.getRight()));
+            node.setLeft(getBalance(node.getLeft()));
         }
     }
 
-    public void add(V[] values) {
-        for (V i : values) {
-            add(i);
+
+    /**
+     * <p> give a TreeNode<V> instance, this method will decide whether to take a rotation operation by check
+     * the difference of the height of his each two children and return pointer of result </p>
+     *
+     * @param treeNode be operated TreeNode<V> instance
+     * @return rotation operation result or @treeNode itself
+     */
+    private TreeNode<V> getBalance(TreeNode<V> treeNode) {
+        if (treeNode == null) {
+            return null;
         }
+
+        int leftHeight = getHeight(treeNode.getLeft());
+        int rightHeight = getHeight(treeNode.getRight());
+
+        if (leftHeight - rightHeight >= 2) {
+            treeNode = leftReduce(treeNode);
+        }
+        if (leftHeight - rightHeight <= -2) {
+            treeNode = rightReduce(treeNode);
+        }
+
+        //when difference of height is 0 or 1
+        return treeNode;
+
+
     }
 
 
