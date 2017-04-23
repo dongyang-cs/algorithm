@@ -4,11 +4,10 @@ package me.alfod.datastructure.tree;
  * Created by arvin
  */
 public interface Tree<V> {
-    void add(V v);
+    void add(final V v);
 
-    void add(V[] v);
 
-    void del(V v);
+    void del(final V v);
 
-    boolean contain(V v);
+    boolean contain(final V v);
 }

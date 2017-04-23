@@ -4,6 +4,7 @@ package me.alfod.datastructure.tree;
  * Created by arvin
  */
 public abstract class BaseTree<V extends Comparable<? super V>> implements Tree<V> {
+    protected TreeNode<V> root;
 
 
     public static int getHeight(final TreeNode node) {
@@ -75,6 +76,12 @@ public abstract class BaseTree<V extends Comparable<? super V>> implements Tree<
 
     private V getIndexInSort(V[] currentArray, Integer index) {
         return getIndexInSort(currentArray, index, 0, currentArray.length - 1);
+    }
+
+    public void add(V[] vs) {
+        for (int i = 0; i < vs.length; i++) {
+            add(vs[i]);
+        }
     }
 
 }

@@ -6,13 +6,31 @@ public class TreeNode<V extends Comparable<? super V>> {
     private TreeNode<V> left;
     private TreeNode<V> parent;
     private V value;
+    private Boolean black;
 
     public TreeNode(V value) {
         this.value = value;
     }
 
+    public TreeNode(V value, Boolean black) {
+        this.value = value;
+        this.black = black;
+    }
+
     public TreeNode() {
 
+    }
+
+    public boolean isBlack() {
+        return black;
+    }
+
+    public void setBlack(boolean black) {
+        this.black = black;
+    }
+
+    public boolean isRightOfParent() {
+        return this.getParent().getParent().equals(this);
     }
 
     public void replace(TreeNode<V> old, TreeNode<V> now) {

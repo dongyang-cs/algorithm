@@ -1,7 +1,6 @@
 package me.alfod.datastructure.tree;
 
 public class AVLTree<V extends Comparable<? super V>> extends BaseTree<V> {
-    private TreeNode<V> root;
 
 
     public AVLTree() {
@@ -62,7 +61,7 @@ public class AVLTree<V extends Comparable<? super V>> extends BaseTree<V> {
                         checkBalance(tmp.getParent().getRight());
                         return;
                     }
-                   tmp = tmp.getLeft();
+                    tmp = tmp.getLeft();
 
                 }
             }
@@ -71,16 +70,6 @@ public class AVLTree<V extends Comparable<? super V>> extends BaseTree<V> {
         }
     }
 
-    private TreeNode<V> del(TreeNode<V> node, V v) {
-        if (node == null) {
-            return null;
-        }
-        if (node.getValue().compareTo(v) == 0) {
-
-        }
-
-        return null;
-    }
 
     @Override
     public boolean contain(final V v) {
@@ -128,11 +117,6 @@ public class AVLTree<V extends Comparable<? super V>> extends BaseTree<V> {
 
     }
 
-    public void add(final V[] values) {
-        for (V v : values) {
-            add(v);
-        }
-    }
 
     /**
      * @param node node should be parent of the node whose son changed
