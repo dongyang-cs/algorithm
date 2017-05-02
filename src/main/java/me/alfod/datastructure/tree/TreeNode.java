@@ -6,31 +6,31 @@ public class TreeNode<V extends Comparable<? super V>> {
     private TreeNode<V> left;
     private TreeNode<V> parent;
     private V value;
-    private Boolean black;
+    private Color color;
 
     public TreeNode(V value) {
         this.value = value;
     }
 
-    public TreeNode(V value, Boolean black) {
+    public TreeNode(V value, Color color) {
         this.value = value;
-        this.black = black;
+        this.color = color;
     }
 
     public TreeNode() {
 
     }
 
-    public boolean isBlack() {
-        return black;
+    public Color getColor() {
+        return color;
     }
 
-    public void setBlack(boolean black) {
-        this.black = black;
+    public void setColor(Color color) {
+        this.color = color;
     }
 
     public boolean isRightOfParent() {
-        return this.getParent().getParent().equals(this);
+        return this.getParent().getRight().equals(this);
     }
 
     public void replace(TreeNode<V> old, TreeNode<V> now) {
@@ -83,7 +83,6 @@ public class TreeNode<V extends Comparable<? super V>> {
 
 
     @Override
-
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("value = ").append(value);
@@ -97,5 +96,9 @@ public class TreeNode<V extends Comparable<? super V>> {
 
         stringBuilder.append("\n");
         return stringBuilder.toString();
+    }
+
+    enum Color {
+        RED, BLACK
     }
 }

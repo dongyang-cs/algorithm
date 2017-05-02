@@ -4,8 +4,6 @@ package me.alfod.datastructure.tree;
  * Created by arvin
  */
 public abstract class BaseTree<V extends Comparable<? super V>> implements Tree<V> {
-    protected TreeNode<V> root;
-
 
     public static int getHeight(final TreeNode node) {
         return getHeight(node, 1);

@@ -1,7 +1,7 @@
 package me.alfod.datastructure.tree;
 
-public class AVLTree<V extends Comparable<? super V>> extends BaseTree<V> {
-
+public class AVLTree<V extends Comparable<? super V>> extends BaseTree<V>  {
+    private TreeNode<V> root;
 
     public AVLTree() {
     }
