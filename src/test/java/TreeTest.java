@@ -1,22 +1,19 @@
-import me.alfod.datastructure.tree.AVLTree;
+import me.alfod.datastructure.tree.RBTree;
+import me.alfod.datastructure.tree.Tree;
 import me.alfod.utils.Print;
 import org.junit.Test;
 
 public class TreeTest {
     @Test
     public void AVLTest() {
-        AVLTree<Integer> avlTree = new AVLTree<>();
-        avlTree.add(1);
-        avlTree.add(2);
-        avlTree.add(3);
-        avlTree.add(4);
-        avlTree.add(5);
-        avlTree.add(6);
-        avlTree.add(7);
-        avlTree.add(8);
-        avlTree.add(9);
-        Print.print(avlTree.getRoot());
-        avlTree.del(4);
-        Print.print(avlTree.getRoot());
+        Tree<Integer> tree = new RBTree<>();
+        for (int i = 0; i < 15; i++) {
+            tree.add(i);
+            Print.print(tree.getRoot());
+            Print.println(Print.getDuplicateString('=',49));
+        }
+        Print.print(tree.getRoot());
+        //tree.del(4);
+       // Print.print(tree.getRoot());
     }
 }

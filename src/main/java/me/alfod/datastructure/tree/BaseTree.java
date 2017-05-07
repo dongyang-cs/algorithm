@@ -1,9 +1,13 @@
 package me.alfod.datastructure.tree;
 
+import me.alfod.utils.Print;
+
 /**
  * Created by arvin
  */
 public abstract class BaseTree<V extends Comparable<? super V>> implements Tree<V> {
+
+    protected TreeNode<V> root;
 
     public static int getHeight(final TreeNode node) {
         return getHeight(node, 1);
@@ -17,19 +21,40 @@ public abstract class BaseTree<V extends Comparable<? super V>> implements Tree<
 
     }
 
+    public TreeNode<V> getRoot() {
+        return root;
+    }
+
     protected TreeNode<V> rightReduce(TreeNode<V> node) {
         TreeNode<V> head = node.getRight();
-        head.setParent(node.getParent());
-
+        if (node.getParent() != null) {
+            if (node.isRightOfParent()) {
+                node.getParent().setRight(head);
+            } else {
+                node.getParent().setLeft(head);
+            }
+        } else {
+            head.setParent(null);
+            root=head;
+        }
         node.setRight(head.getLeft());
         head.setLeft(node);
+
         return head;
     }
 
     protected TreeNode<V> leftReduce(TreeNode<V> node) {
         TreeNode<V> head = node.getLeft();
-        head.setParent(node.getParent());
-
+        if (node.getParent() != null) {
+            if (node.isRightOfParent()) {
+                node.getParent().setRight(head);
+            } else {
+                node.getParent().setLeft(head);
+            }
+        } else {
+            head.setParent(null);
+            root=head;
+        }
         node.setLeft(head.getRight());
         head.setRight(node);
         return head;

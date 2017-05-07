@@ -51,6 +51,9 @@ public class Print {
     }
 
     public static <V extends Comparable<? super V>> void print(TreeNode<V> root) {
+        if(root==null){
+            print(null);
+        }
         List<TreeNode<V>> currentNodes = new ArrayList<>();
         currentNodes.add(root);
         List<TreeNode<V>> lastNodes = new ArrayList<>();
@@ -84,7 +87,7 @@ public class Print {
                 else linkChar = ' ';
                 if (currentNode.getValue() != null) {
                     numberLength = String.valueOf(currentNode.getValue()).length();
-                    stringBuilder.append(currentNode.getValue()).append(getDuplicateString(linkChar, currentLength - numberLength));
+                    stringBuilder.append(currentNode.getValue()+currentNode.getColor().getName()).append(getDuplicateString(linkChar, currentLength - numberLength));
                 } else {
                     if (a % 2 == 0 && currentNodes.get(a + 1).getValue() == null)
                         stringBuilder.append(' ').append(getDuplicateString(' ', currentLength - 1));
