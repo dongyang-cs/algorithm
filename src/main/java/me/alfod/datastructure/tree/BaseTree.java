@@ -1,7 +1,5 @@
 package me.alfod.datastructure.tree;
 
-import me.alfod.utils.Print;
-
 /**
  * Created by arvin
  */
@@ -25,7 +23,7 @@ public abstract class BaseTree<V extends Comparable<? super V>> implements Tree<
         return root;
     }
 
-    protected TreeNode<V> rightReduce(TreeNode<V> node) {
+    protected TreeNode<V> rotateLeft(TreeNode<V> node) {
         TreeNode<V> head = node.getRight();
         if (node.getParent() != null) {
             if (node.isRightOfParent()) {
@@ -35,7 +33,7 @@ public abstract class BaseTree<V extends Comparable<? super V>> implements Tree<
             }
         } else {
             head.setParent(null);
-            root=head;
+            root = head;
         }
         node.setRight(head.getLeft());
         head.setLeft(node);
@@ -43,7 +41,7 @@ public abstract class BaseTree<V extends Comparable<? super V>> implements Tree<
         return head;
     }
 
-    protected TreeNode<V> leftReduce(TreeNode<V> node) {
+    protected TreeNode<V> rotateRight(TreeNode<V> node) {
         TreeNode<V> head = node.getLeft();
         if (node.getParent() != null) {
             if (node.isRightOfParent()) {
@@ -53,11 +51,21 @@ public abstract class BaseTree<V extends Comparable<? super V>> implements Tree<
             }
         } else {
             head.setParent(null);
-            root=head;
+            root = head;
         }
         node.setLeft(head.getRight());
         head.setRight(node);
         return head;
+    }
+
+    protected TreeNode<V> doubleRotateLeft(TreeNode<V> node) {
+        rotateRight(node.getRight());
+        return rotateLeft(node);
+    }
+
+    protected TreeNode<V> doubleRotateRight(TreeNode<V> node) {
+        rotateLeft(node.getLeft());
+        return rotateRight(node);
     }
 
     @SuppressWarnings("unchecked")

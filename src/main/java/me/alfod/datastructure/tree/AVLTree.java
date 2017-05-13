@@ -154,10 +154,10 @@ public class AVLTree<V extends Comparable<? super V>> extends BaseTree<V>  {
         int rightHeight = getHeight(treeNode.getRight());
 
         if (leftHeight - rightHeight >= 2) {
-            treeNode = leftReduce(treeNode);
+            treeNode = rotateRight(treeNode);
         }
         if (leftHeight - rightHeight <= -2) {
-            treeNode = rightReduce(treeNode);
+            treeNode = rotateLeft(treeNode);
         }
 
         //when difference of height is 0 or 1
