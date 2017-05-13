@@ -172,6 +172,39 @@ public class RBTree<V extends Comparable<? super V>> extends BaseTree<V> {
 
     @Override
     public void del(V v) {
+        TreeNode<V> node = root;
+        while (node != null) {
+            if (v.compareTo(node.getValue()) > 0) {
+                if (node.getRight() != null) {
+                    node = node.getRight();
+                }
+            } else if (v.compareTo(node.getValue()) < 0) {
+                if (node.getLeft() != null) {
+                    node = node.getLeft();
+                }
+            } else {
+                //v is equal to node.getValue()
+                if (node.getLeft() != null) {
+                    while (node.getRight() != null) {
+                        node = node.getRight();
+                    }
+                    deleteNode(node);
+                    return;
+                } else if (node.getRight() != null) {
+                    while (node.getLeft() != null) {
+                        node = node.getLeft();
+                    }
+                    deleteNode(node);
+                    return;
+                } else {
+                    deleteNode(node);
+                    return;
+                }
+            }
+        }
+    }
+
+    private void deleteNode(TreeNode<V> node) {
 
     }
 
