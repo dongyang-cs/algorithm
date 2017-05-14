@@ -284,6 +284,9 @@ public class RBTree<V extends Comparable<? super V>> extends BaseTree<V> {
                 //brother color is black
                 //parent color is black
                 //node color is black
+                if (brother.getRight() == null && brother.getLeft() == null) {
+                    
+                }
                 if (brother.isRightOfParent()) {
                     if (brother.getRight() != null) {
                         brother.getRight().setColor(Color.BLACK);
@@ -294,6 +297,18 @@ public class RBTree<V extends Comparable<? super V>> extends BaseTree<V> {
                     } else if (brother.getLeft() != null) {
                         brother.getLeft().setColor(Color.BLACK);
                         doubleRotateLeft(parent);
+                    }
+                } else {
+                    //brother is on left of parent
+                    if (brother.getLeft() != null) {
+                        brother.getLeft().setColor(Color.BLACK);
+                        if (brother.getRight() != null) {
+                            brother.getLeft().setRight(brother.getRight());
+                        }
+                        rotateRight(parent);
+                    } else if (brother.getRight() != null) {
+                        brother.getRight().setColor(Color.BLACK);
+                        doubleRotateRight(parent);
                     }
                 }
 
