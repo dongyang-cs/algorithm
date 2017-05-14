@@ -32,4 +32,9 @@ public class TreeTest {
         }
         Print.print(tree.getRoot());
     }
+
+    @Test
+    public void hash() {
+
+    }
 }

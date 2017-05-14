@@ -66,22 +66,32 @@ public class SplayTree<V extends Comparable<? super V>> extends BaseTree<V> {
     @Override
     public boolean contain(V v) {
         TreeNode<V> node = root;
-        while (node != null) {
-            if (v.compareTo(node.getValue()) > 0) {
-                node = node.getRight();
-            } else if (v.compareTo(node.getValue()) < 0) {
-                node = node.getLeft();
-            } else {
-                if (root != node) {
-                    if (node.isRight()) {
-                        rotateLeft(node.getParent());
-                    } else {
-                        rotateRight(node.getParent());
-                    }
+        exec(v, null, (TreeNode<V> n) -> {
+            if (root != n) {
+                if (n.isRight()) {
+                    rotateLeft(n.getParent());
+                } else {
+                    rotateRight(n.getParent());
                 }
-                return true;
             }
-        }
+            return n;
+        }, null);
+//        while (node != null) {
+//            if (v.compareTo(node.getValue()) > 0) {
+//                node = node.getRight();
+//            } else if (v.compareTo(node.getValue()) < 0) {
+//                node = node.getLeft();
+//            } else {
+//                if (root != node) {
+//                    if (node.isRight()) {
+//                        rotateLeft(node.getParent());
+//                    } else {
+//                        rotateRight(node.getParent());
+//                    }
+//                }
+//                return true;
+//            }
+//        }
         return false;
     }
 }

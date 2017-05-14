@@ -1,5 +1,7 @@
 package me.alfod.datastructure.tree;
 
+import java.util.function.Function;
+
 /**
  * Created by arvin
  */
@@ -68,45 +70,27 @@ public abstract class BaseTree<V extends Comparable<? super V>> implements Tree<
         return rotateRight(node);
     }
 
-    @SuppressWarnings("unchecked")
-    private V getIndexInSort(V[] currentArray, Integer index, Integer head, Integer tail) {
-        V[] nextArray = (V[]) (new Object[currentArray.length]);
-        V[] tmpArray;
-        V axle, int1, int2, int3;
-        Integer lastHead, lastTail, tmpIndex;
-        while (true) {
-            int1 = currentArray[head];
-            int2 = currentArray[tail];
-            int3 = currentArray[(head + tail) / 2];
-            axle = int1.compareTo(int2) > 0 ? int1 : int2;
-            axle = axle.compareTo(int3) > 0 ? int3 : axle;
-
-            lastHead = head;
-            lastTail = tail;
-            //println("head: " + head + " tail:" + tail);
-            for (tmpIndex = lastHead; tmpIndex <= lastTail; tmpIndex++) {
-                if (currentArray[tmpIndex].compareTo(axle) > 0) nextArray[head++] = currentArray[tmpIndex];
-                else if (currentArray[tmpIndex].compareTo(axle) < 0) nextArray[tail--] = currentArray[tmpIndex];
+    protected void exec(V v, Function<TreeNode<V>, TreeNode<V>> greater,
+                        Function<TreeNode<V>, TreeNode<V>> equal,
+                        Function<TreeNode<V>, TreeNode<V>> less) {
+        TreeNode<V> node = root;
+        while (node != null) {
+            if (v.compareTo(node.getValue()) > 0) {
+                node = node.getRight();
+                if (greater != null) {
+                    greater.apply(node);
+                }
+            } else if (v.compareTo(node.getValue()) == 0) {
+                if (equal != null) {
+                    equal.apply(node);
+                }
+            } else if (v.compareTo(node.getValue()) < 0) {
+                node = node.getLeft();
+                if (less != null) {
+                    less.apply(node);
+                }
             }
-            if ((tail - head) > -1) {
-                for (tmpIndex = head; tmpIndex <= tail; tmpIndex++) nextArray[tmpIndex] = axle;
-            }
-            if (head > index) {
-                tail = head;
-                head = lastHead;
-            } else if (tail < index) {
-                head = tail;
-                tail = lastTail;
-            } else return axle;
-            tmpArray = currentArray;
-            currentArray = nextArray;
-            nextArray = tmpArray;
         }
-
-    }
-
-    private V getIndexInSort(V[] currentArray, Integer index) {
-        return getIndexInSort(currentArray, index, 0, currentArray.length - 1);
     }
 
     public void add(V[] vs) {
