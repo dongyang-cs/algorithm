@@ -26,7 +26,7 @@ public abstract class BaseTree<V extends Comparable<? super V>> implements Tree<
     protected TreeNode<V> rotateLeft(TreeNode<V> node) {
         TreeNode<V> head = node.getRight();
         if (node.getParent() != null) {
-            if (node.isRightOfParent()) {
+            if (node.isRight()) {
                 node.getParent().setRight(head);
             } else {
                 node.getParent().setLeft(head);
@@ -44,7 +44,7 @@ public abstract class BaseTree<V extends Comparable<? super V>> implements Tree<
     protected TreeNode<V> rotateRight(TreeNode<V> node) {
         TreeNode<V> head = node.getLeft();
         if (node.getParent() != null) {
-            if (node.isRightOfParent()) {
+            if (node.isRight()) {
                 node.getParent().setRight(head);
             } else {
                 node.getParent().setLeft(head);

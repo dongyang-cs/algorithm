@@ -33,18 +33,25 @@ public class TreeNode<V extends Comparable<? super V>> {
         if (parent == null) {
             return;
         }
-        if (isRightOfParent()) {
+        if (isRight()) {
             parent.setRight(null);
         } else {
             parent.setLeft(null);
         }
     }
 
-    public boolean isRightOfParent() {
-        if (getParent().getRight() == null) {
+    public boolean isRight() {
+        if (parent == null || parent.getRight() == null) {
             return false;
         }
-        return this.getParent().getRight().equals(this);
+        return parent.getRight() == this;
+    }
+
+    public boolean isLeft() {
+        if (parent == null || parent.getLeft() == null) {
+            return false;
+        }
+        return parent.getLeft() == this;
     }
 
     public void replace(TreeNode<V> old, TreeNode<V> now) {
@@ -76,7 +83,7 @@ public class TreeNode<V extends Comparable<? super V>> {
         if (parent == null || parent.getParent() == null) {
             return null;
         }
-        if (parent.isRightOfParent()) {
+        if (parent.isRight()) {
             return parent.getParent().getRight();
         } else {
             return parent.getParent().getLeft();
@@ -87,18 +94,11 @@ public class TreeNode<V extends Comparable<? super V>> {
         if (parent == null) {
             return null;
         }
-        if (isRightOfParent()) {
+        if (isRight()) {
             return parent.getLeft();
         } else {
             return parent.getRight();
         }
-    }
-
-    public boolean isLeaf() {
-        if (left == null && right == null) {
-            return true;
-        }
-        return false;
     }
 
     public TreeNode<V> getRight() {

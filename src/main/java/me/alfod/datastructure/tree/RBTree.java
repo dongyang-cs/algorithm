@@ -63,9 +63,9 @@ public class RBTree<V extends Comparable<? super V>> extends BaseTree<V> {
             root = parent;
             return;
         }
-        if (parent.isRightOfParent()) {
+        if (parent.isRight()) {
             TreeNode<V> uncle = grandPa.getLeft();
-            if (node.isRightOfParent()) {
+            if (node.isRight()) {
                 if (grandPa.getLeft() == null) {
                     Print.println("right right left_null");
                     rotateLeft(grandPa);
@@ -93,7 +93,7 @@ public class RBTree<V extends Comparable<? super V>> extends BaseTree<V> {
                 if (uncle == null || uncle.getColor() == Color.BLACK) {
                     Print.println("right left left_null");
                     if (grandPa.getParent() != null) {
-                        if (grandPa.isRightOfParent()) {
+                        if (grandPa.isRight()) {
                             grandPa.getParent().setRight(node);
                         } else {
                             grandPa.getParent().setLeft(node);
@@ -119,11 +119,11 @@ public class RBTree<V extends Comparable<? super V>> extends BaseTree<V> {
         } else {
 
             TreeNode<V> uncle = grandPa.getRight();
-            if (node.isRightOfParent()) {
+            if (node.isRight()) {
                 if (uncle == null || uncle.getColor() == Color.BLACK) {
                     Print.println("left right ");
                     if (grandPa.getParent() != null) {
-                        if (grandPa.isRightOfParent()) {
+                        if (grandPa.isRight()) {
                             grandPa.getParent().setRight(node);
                         } else {
                             grandPa.getParent().setLeft(node);
@@ -184,17 +184,20 @@ public class RBTree<V extends Comparable<? super V>> extends BaseTree<V> {
                 }
             } else {
                 //v is equal to node.getValue()
-                if (node.getLeft() != null) {
-                    while (node.getRight() != null) {
-                        node = node.getRight();
+                TreeNode<V> suspects = node;
+                if (suspects.getLeft() != null) {
+                    while (suspects.getRight() != null) {
+                        suspects = suspects.getRight();
                     }
-                    deleteNode(node);
+                    node.setValue(suspects.getValue());
+                    deleteNode(suspects);
                     return;
-                } else if (node.getRight() != null) {
-                    while (node.getLeft() != null) {
-                        node = node.getLeft();
+                } else if (suspects.getRight() != null) {
+                    while (suspects.getLeft() != null) {
+                        suspects = suspects.getLeft();
                     }
-                    deleteNode(node);
+                    node.setValue(suspects.getValue());
+                    deleteNode(suspects);
                     return;
                 } else {
                     deleteNode(node);
@@ -222,7 +225,7 @@ public class RBTree<V extends Comparable<? super V>> extends BaseTree<V> {
             } else if (node.getLeft() != null) {
                 node.getLeft().setColor(Color.BLACK);
                 parent.replace(node, node.getLeft());
-            } else if (node.isRightOfParent()) {
+            } else if (node.isRight()) {
                 //brother is on left side of parent
                 TreeNode<V> brother = node.getBrother();
                 if (brother.getLeft() != null) {
@@ -273,7 +276,7 @@ public class RBTree<V extends Comparable<? super V>> extends BaseTree<V> {
             } else if (brother.getColor() == Color.RED) {
                 parent.setColor(Color.RED);
                 brother.setColor(Color.BLACK);
-                if (brother.isRightOfParent()) {
+                if (brother.isRight()) {
                     rotateLeft(parent);
                 } else {
                     rotateRight(parent);
@@ -285,9 +288,10 @@ public class RBTree<V extends Comparable<? super V>> extends BaseTree<V> {
                 //parent color is black
                 //node color is black
                 if (brother.getRight() == null && brother.getLeft() == null) {
-                    
+                    makeRed(node);
+                    node.delete();
                 }
-                if (brother.isRightOfParent()) {
+                if (brother.isRight()) {
                     if (brother.getRight() != null) {
                         brother.getRight().setColor(Color.BLACK);
                         if (brother.getLeft() != null) {
@@ -313,7 +317,69 @@ public class RBTree<V extends Comparable<? super V>> extends BaseTree<V> {
                 }
 
             }
+            node.delete();
         }
+    }
+
+    /**
+     * when all is black and suspects and brother is leaf
+     */
+    private void makeRed(TreeNode<V> node) {
+        if (node == null || node.getParent() == null) {
+            return;
+        }
+        TreeNode<V> brother = node.getBrother();
+        TreeNode<V> parent = node.getParent();
+        TreeNode<V> grand = parent.getParent();
+        TreeNode<V> uncle = parent.getUncle();
+        if (grand == null) {
+            //parent is root
+            brother.setColor(Color.RED);
+            node.setColor(Color.RED);
+        } else if (grand.getColor() == Color.RED) {
+            if (parent.isRight()) {
+                rotateRight(grand);
+            } else {
+                rotateLeft(grand);
+            }
+            brother.setColor(Color.RED);
+            node.setColor(Color.RED);
+        } else if (grand.getColor() == Color.BLACK) {
+            if (uncle.getColor() == Color.RED) {
+                uncle.setColor(Color.BLACK);
+                if (parent.isRight()) {
+                    rotateRight(grand);
+                } else {
+                    rotateLeft(grand);
+                }
+                brother.setColor(Color.RED);
+                node.setColor(Color.RED);
+            } else {
+                if (uncle.getRight().getColor() == Color.RED) {
+                    uncle.getRight().setColor(Color.BLACK);
+                    if (uncle.isRight()) {
+                        rotateLeft(grand);
+                    } else {
+                        doubleRotateLeft(grand);
+                    }
+                    brother.setColor(Color.RED);
+                    node.setColor(Color.RED);
+                } else if (uncle.getLeft().getColor() == Color.RED) {
+                    uncle.getLeft().setColor(Color.BLACK);
+                    if (uncle.isLeft()) {
+                        rotateRight(grand);
+                    } else {
+                        doubleRotateRight(grand);
+                    }
+                    brother.setColor(Color.RED);
+                    node.setColor(Color.RED);
+                } else {
+                    makeRed(parent);
+                    makeRed(node);
+                }
+            }
+        }
+
     }
 
 
