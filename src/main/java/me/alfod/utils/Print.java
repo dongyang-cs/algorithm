@@ -51,8 +51,8 @@ public class Print {
     }
 
     public static <V extends Comparable<? super V>> void print(TreeNode<V> root) {
-        if(root==null){
-            print(null);
+        if (root == null) {
+            print("null");
         }
         List<TreeNode<V>> currentNodes = new ArrayList<>();
         currentNodes.add(root);
@@ -73,11 +73,11 @@ public class Print {
             for (int a = 0; a < currentNodes.size(); a++) {
                 currentNode = currentNodes.get(a);
 
-                if (currentNode.getLeft() != null)
+                if (currentNode != null && currentNode.getLeft() != null)
                     lastNodes.add(currentNode.getLeft());
                 else lastNodes.add(new TreeNode<V>(null));
 
-                if (currentNode.getRight() != null)
+                if (currentNode != null && currentNode.getRight() != null)
                     lastNodes.add(currentNode.getRight());
                 else lastNodes.add(new TreeNode<V>(null));
 
@@ -85,9 +85,13 @@ public class Print {
                 char linkChar;
                 if (a % 2 == 0) linkChar = '-';
                 else linkChar = ' ';
-                if (currentNode.getValue() != null) {
+                if (currentNode != null && currentNode.getValue() != null) {
                     numberLength = String.valueOf(currentNode.getValue()).length();
-                    stringBuilder.append(currentNode.getValue()+currentNode.getColor().getName()).append(getDuplicateString(linkChar, currentLength - numberLength));
+                    if (currentNode.getColor() != null) {
+                        stringBuilder.append(currentNode.getValue() + currentNode.getColor().getName()).append(getDuplicateString(linkChar, currentLength - numberLength));
+                    } else {
+                        stringBuilder.append(currentNode.getValue()).append(getDuplicateString(linkChar, currentLength - numberLength));
+                    }
                 } else {
                     if (a % 2 == 0 && currentNodes.get(a + 1).getValue() == null)
                         stringBuilder.append(' ').append(getDuplicateString(' ', currentLength - 1));

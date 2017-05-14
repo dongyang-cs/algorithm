@@ -184,20 +184,20 @@ public class RBTree<V extends Comparable<? super V>> extends BaseTree<V> {
                 }
             } else {
                 //v is equal to node.getValue()
-                TreeNode<V> suspects = node;
-                if (suspects.getLeft() != null) {
-                    while (suspects.getRight() != null) {
-                        suspects = suspects.getRight();
+                TreeNode<V> suspect = node;
+                if (suspect.getLeft() != null) {
+                    while (suspect.getRight() != null) {
+                        suspect = suspect.getRight();
                     }
-                    node.setValue(suspects.getValue());
-                    deleteNode(suspects);
+                    node.setValue(suspect.getValue());
+                    deleteNode(suspect);
                     return;
-                } else if (suspects.getRight() != null) {
-                    while (suspects.getLeft() != null) {
-                        suspects = suspects.getLeft();
+                } else if (suspect.getRight() != null) {
+                    while (suspect.getLeft() != null) {
+                        suspect = suspect.getLeft();
                     }
-                    node.setValue(suspects.getValue());
-                    deleteNode(suspects);
+                    node.setValue(suspect.getValue());
+                    deleteNode(suspect);
                     return;
                 } else {
                     deleteNode(node);
@@ -322,7 +322,7 @@ public class RBTree<V extends Comparable<? super V>> extends BaseTree<V> {
     }
 
     /**
-     * when all is black and suspects and brother is leaf
+     * when all is black and suspect and brother is leaf
      */
     private void makeRed(TreeNode<V> node) {
         if (node == null || node.getParent() == null) {
