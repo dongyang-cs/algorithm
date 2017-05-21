@@ -12,34 +12,21 @@ public class RBTree<V extends Comparable<? super V>> extends BaseTree<V> {
             root = new TreeNode<>(v, Color.BLACK);
             return;
         }
-        TreeNode<V> node = root;
         TreeNode<V> valueNode = new TreeNode<>(v, Color.RED);
-        while (node != null) {
-            if (v.compareTo(node.getValue()) > 0) {
-                if (node.getRight() != null) {
-                    node = node.getRight();
-                    continue;
-                }
-                node.setRight(valueNode);
-                if (node.getColor() == Color.RED) {
-                    colorCheck(valueNode);
-                }
-                return;
-            }
-            if (v.compareTo(node.getValue()) < 0) {
-                if (node.getLeft() != null) {
-                    node = node.getLeft();
-                    continue;
-                }
-                node.setLeft(valueNode);
-                if (node.getColor() == Color.RED) {
-                    colorCheck(valueNode);
-                }
-                return;
-            }
-            return;
-        }
-
+        findThenApply(v, (TreeNode<V> node) -> {
+                    node.setRight(valueNode);
+                    if (node.getColor() == Color.RED) {
+                        colorCheck(valueNode);
+                    }
+                }, (TreeNode<V> node) -> {
+                    node.setValue(v);
+                },
+                (TreeNode<V> node) -> {
+                    node.setLeft(valueNode);
+                    if (node.getColor() == Color.RED) {
+                        colorCheck(valueNode);
+                    }
+                });
     }
 
     private void colorCheck(TreeNode<V> node) {
@@ -380,12 +367,6 @@ public class RBTree<V extends Comparable<? super V>> extends BaseTree<V> {
             }
         }
 
-    }
-
-
-    @Override
-    public boolean contain(V v) {
-        return false;
     }
 
 

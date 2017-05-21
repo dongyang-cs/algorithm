@@ -129,6 +129,7 @@ public abstract class BaseTree<V extends Comparable<? super V>> implements Tree<
         return findThenApply(v, null, equal, null);
     }
 
+
     protected TreeNode<V> findUnequalThenApply(V v,
                                                Consumer<TreeNode<V>> larger,
                                                Consumer<TreeNode<V>> smaller) {
@@ -140,6 +141,13 @@ public abstract class BaseTree<V extends Comparable<? super V>> implements Tree<
         for (int i = 0; i < vs.length; i++) {
             add(vs[i]);
         }
+    }
+
+    @Override
+    public boolean contain(V v) {
+        return findEqualThenApply(v, (TreeNode<V> node) -> {
+//empty function is in need for behavior consistency
+        }) != null;
     }
 
 }

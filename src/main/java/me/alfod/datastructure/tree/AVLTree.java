@@ -43,12 +43,6 @@ public class AVLTree<V extends Comparable<? super V>> extends BaseTree<V> {
     }
 
 
-    @Override
-    public boolean contain(final V v) {
-        return findEqualThenApply(v, null) != null;
-    }
-
-
     public void add(final V value) {
         if (root == null) {
             root = new TreeNode<>(value);
