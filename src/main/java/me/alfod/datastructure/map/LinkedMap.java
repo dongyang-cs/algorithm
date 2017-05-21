@@ -32,6 +32,7 @@ public class LinkedMap<K extends Serializable, V> extends BaseHash<K, V> {
             }
             if (node.getK().equals(k)) {
                 node.setV(v);
+                return;
             } else {
                 node.setNext(new HashNode<>(k, v));
             }
@@ -83,7 +84,7 @@ public class LinkedMap<K extends Serializable, V> extends BaseHash<K, V> {
             return;
         }
         if (node.getK().equals(k)) {
-            table[index] = (null == node.getNext() ? null : node.getNext());
+            table[index] = node.getNext();
             return;
         }
         while (node.getNext() != null) {

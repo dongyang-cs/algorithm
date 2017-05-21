@@ -80,5 +80,16 @@ public class HashNode<K, V> {
         } else {
             return Math.abs(k.hashCode());
         }
+
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof HashNode) {
+            if (((HashNode) obj).getK().equals(this.k)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

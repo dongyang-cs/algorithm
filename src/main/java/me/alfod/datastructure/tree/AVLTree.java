@@ -1,6 +1,6 @@
 package me.alfod.datastructure.tree;
 
-public class AVLTree<V extends Comparable<? super V>> extends BaseTree<V>  {
+public class AVLTree<V extends Comparable<? super V>> extends BaseTree<V> {
 
     public AVLTree() {
     }
@@ -13,26 +13,11 @@ public class AVLTree<V extends Comparable<? super V>> extends BaseTree<V>  {
         add(v);
     }
 
-    public TreeNode<V> getRoot() {
-        return root;
-    }
-
     @Override
     public void del(V v) {
-        TreeNode<V> node = root;
-        TreeNode<V> tmp;
-        while (true) {
-            if (node == null) {
-                break;
-            }
-            if (node.getValue().compareTo(v) > 0) {
-                node = node.getLeft();
-                continue;
-            }
-            if (node.getValue().compareTo(v) < 0) {
-                node = node.getRight();
-                continue;
-            }
+
+        findEqualThenApply(v, (TreeNode<V> node) -> {
+            TreeNode<V> tmp, tmpParent;
             //when node`s value is equal to v, replace the node`s right child`s most-left leave
             if (getHeight(node.getLeft()) >= getHeight(node.getRight())) {
                 tmp = node.getLeft();
@@ -41,79 +26,46 @@ public class AVLTree<V extends Comparable<? super V>> extends BaseTree<V>  {
                     checkBalance(node.getParent().getParent());
                     return;
                 }
-                while (true) {
-                    if (tmp.getRight() == null) {
-                        node.setValue(tmp.getValue());
-                        tmp.getParent().replace(tmp, null);
-                        checkBalance(tmp.getParent().getRight());
-                        return;
-                    }
-                    tmp = tmp.getRight();
-
-                }
+                tmp = findUniformRight(tmp);
+                node.setValue(tmp.getValue());
+                tmpParent = tmp.getParent();
+                tmp.delete();
+                checkBalance(tmpParent.getParent());
             } else {
                 tmp = node.getRight();
-                while (true) {
-                    if (tmp.getLeft() == null) {
-                        node.setValue(tmp.getValue());
-                        tmp.getParent().replace(tmp, null);
-                        checkBalance(tmp.getParent().getRight());
-                        return;
-                    }
-                    tmp = tmp.getLeft();
-
-                }
+                tmp = findUniformLeft(tmp);
+                node.setValue(tmp.getValue());
+                tmpParent = tmp.getParent();
+                tmp.delete();
+                checkBalance(tmpParent.getParent());
             }
-
-
-        }
+        });
     }
 
 
     @Override
     public boolean contain(final V v) {
-        return contain(root, v);
+        return findEqualThenApply(v, null) != null;
     }
 
-    private boolean contain(final TreeNode<V> node, final V v) {
-
-        return node != null
-                && (node.getValue().compareTo(v) == 0
-                || contain(node.getLeft(), v)
-                || contain(node.getRight(), v));
-
-    }
 
     public void add(final V value) {
         if (root == null) {
             root = new TreeNode<>(value);
             return;
         }
-        TreeNode<V> node = root;
         final TreeNode<V> valueNode = new TreeNode<>(value);
-        while (true) {
-            if (value.compareTo(node.getValue()) > 0) {
-                if (node.getRight() != null) {
-                    node = node.getRight();
-                    continue;
-                } else {
+        findThenApply(value,
+                (TreeNode<V> node) -> {
                     node.setRight(valueNode);
                     checkBalance(node.getParent());
-                    return;
-                }
-            } else if (value.compareTo(node.getValue()) < 0) {
-                if (node.getLeft() != null) {
-                    node = node.getLeft();
-                    continue;
-                } else {
+                }, (TreeNode<V> node) -> {
+                    node.setValue(value);
+                },
+                (TreeNode<V> node) -> {
                     node.setLeft(valueNode);
                     checkBalance(node.getParent());
-                    return;
-                }
-            }
-            return;
-        }
-
+                });
     }
 
 
@@ -127,13 +79,13 @@ public class AVLTree<V extends Comparable<? super V>> extends BaseTree<V>  {
         while (true) {
             //when node is root, need special treatment
             if (node.getParent() == null) {
-                root = getBalance(node);
+                root = makeBalance(node);
                 return;
             }
             node = node.getParent();
 
-            node.setRight(getBalance(node.getRight()));
-            node.setLeft(getBalance(node.getLeft()));
+            node.setRight(makeBalance(node.getRight()));
+            node.setLeft(makeBalance(node.getLeft()));
         }
     }
 
@@ -145,7 +97,7 @@ public class AVLTree<V extends Comparable<? super V>> extends BaseTree<V>  {
      * @param treeNode be operated TreeNode<V> instance
      * @return rotation operation result or @treeNode itself
      */
-    private TreeNode<V> getBalance(TreeNode<V> treeNode) {
+    private TreeNode<V> makeBalance(TreeNode<V> treeNode) {
         if (treeNode == null) {
             return null;
         }

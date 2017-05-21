@@ -1,6 +1,6 @@
 package me.alfod.datastructure.tree;
 
-import java.util.function.Function;
+import java.util.function.Consumer;
 
 /**
  * Created by arvin
@@ -70,28 +70,71 @@ public abstract class BaseTree<V extends Comparable<? super V>> implements Tree<
         return rotateRight(node);
     }
 
-    protected void exec(V v, Function<TreeNode<V>, TreeNode<V>> greater,
-                        Function<TreeNode<V>, TreeNode<V>> equal,
-                        Function<TreeNode<V>, TreeNode<V>> less) {
+    protected TreeNode<V> findThenApply(V v, Consumer<TreeNode<V>> larger,
+                                        Consumer<TreeNode<V>> equal,
+                                        Consumer<TreeNode<V>> smaller) {
         TreeNode<V> node = root;
         while (node != null) {
             if (v.compareTo(node.getValue()) > 0) {
-                node = node.getRight();
-                if (greater != null) {
-                    greater.apply(node);
+                if (node.getRight() == null) {
+                    if (larger != null) {
+                        larger.accept(node);
+                        return node;
+                    }
+
                 }
+                node = node.getRight();
+
             } else if (v.compareTo(node.getValue()) == 0) {
                 if (equal != null) {
-                    equal.apply(node);
+                    equal.accept(node);
+                    return node;
                 }
+
             } else if (v.compareTo(node.getValue()) < 0) {
-                node = node.getLeft();
-                if (less != null) {
-                    less.apply(node);
+                if (node.getLeft() == null) {
+                    if (smaller != null) {
+                        smaller.accept(node);
+                        return node;
+                    }
                 }
+                node = node.getLeft();
             }
         }
+        return null;
     }
+
+    protected TreeNode<V> findUniformLeft(TreeNode<V> node) {
+        if (node == null) {
+            return null;
+        }
+        while (node.getLeft() != null) {
+            node = node.getLeft();
+        }
+        return node;
+    }
+
+    protected TreeNode<V> findUniformRight(TreeNode<V> node) {
+        if (node == null) {
+            return null;
+        }
+        while (node.getRight() != null) {
+            node = node.getRight();
+        }
+        return node;
+    }
+
+
+    protected TreeNode<V> findEqualThenApply(V v, Consumer<TreeNode<V>> equal) {
+        return findThenApply(v, null, equal, null);
+    }
+
+    protected TreeNode<V> findUnequalThenApply(V v,
+                                               Consumer<TreeNode<V>> larger,
+                                               Consumer<TreeNode<V>> smaller) {
+        return findThenApply(v, larger, null, smaller);
+    }
+
 
     public void add(V[] vs) {
         for (int i = 0; i < vs.length; i++) {

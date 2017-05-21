@@ -55,7 +55,6 @@ public class Quick {
             inputArray = sort(inputArray, tmpArray, tmpTail + 1, TAIL);
         }
 
-
         return inputArray;
     }
 
