@@ -1,6 +1,5 @@
 package me.alfod.datastructure.safe.map;
 
-import me.alfod.datastructure.map.Abstract;
 import sun.misc.Unsafe;
 
 import java.lang.reflect.ParameterizedType;
@@ -13,7 +12,7 @@ import java.util.Set;
 /**
  * Created by Arvin Alfod on 2017/6/8.
  */
-public class ConcurrentMap<K, V> extends Abstract<Integer> implements Map<K, V> {
+public class ConcurrentMap<K, V> implements Map<K, V> {
     private static final int CAT_FAILED_THEN_SLEEP_THRESHOLD = 10;
     private static final int CAT_FAILED_THEN_SLEEP_TIME_CAP = 10;
     private static final int CAT_FAILED_THEN_SLEEP_TIME_FLOOR = 10;
