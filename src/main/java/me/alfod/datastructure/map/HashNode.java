@@ -86,10 +86,15 @@ public class HashNode<K, V> {
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof HashNode) {
-            if (((HashNode) obj).getK().equals(this.k)) {
+            if ((((HashNode) obj).getK().getClass() != k.getClass())
+                    || ((HashNode) obj).getV().getClass() != v.getClass()) {
+                return false;
+            }
+            if (((HashNode<K, V>) obj).getK().equals(this.k)) {
                 return true;
             }
         }
         return false;
     }
+
 }
