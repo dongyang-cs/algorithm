@@ -241,7 +241,7 @@ public class ConcurrentMap<K, V> implements Map<K, V> {
                     return point;
                 }
                 if (point.next == null) {
-                    synchronized (this) {
+                    synchronized (point.getThis()) {
                         if (point.next == null) {
                             point.assignNext(new Node<>(k, v));
                             return point.next;
@@ -253,6 +253,10 @@ public class ConcurrentMap<K, V> implements Map<K, V> {
             }
         }
 
+        private Node<K, V> getNext() {
+            return this.next;
+        }
+
         private void sleep() {
             try {
                 Thread.sleep(CAT_FAILED_THEN_SLEEP_TIME_FLOOR + (long) (Math.random() * CAT_FAILED_THEN_SLEEP_TIME_CAP));
@@ -261,6 +265,9 @@ public class ConcurrentMap<K, V> implements Map<K, V> {
             }
         }
 
+        public Node<K, V> getThis() {
+            return this;
+        }
 
         public Node<K, V> findValue(Object v) {
             return find(v, false);
@@ -274,7 +281,8 @@ public class ConcurrentMap<K, V> implements Map<K, V> {
                     return point;
                 }
                 if (point.next == null) {
-                    synchronized (this) {
+                    //only synchronized the object itself
+                    synchronized (point.getThis()) {
                         if (point.next == null) {
                             return null;
                         } else {
@@ -284,6 +292,7 @@ public class ConcurrentMap<K, V> implements Map<K, V> {
                 }
             }
         }
+
 
         public Node<K, V> findKey(Object k) {
             return find(k, true);
