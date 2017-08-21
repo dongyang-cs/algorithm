@@ -5,10 +5,10 @@ package me.alfod.datastructure.graph;
  */
 public class Line {
     private int weight;
-    private GraphNode graphNode;
+    private Node node;
 
-    public Line(GraphNode graphNode, int weight) {
-        this.graphNode = graphNode;
+    public Line(Node node, int weight) {
+        this.node = node;
         this.weight = weight;
     }
 
@@ -20,11 +20,11 @@ public class Line {
         this.weight = weight;
     }
 
-    public GraphNode getGraphNode() {
-        return graphNode;
+    public Node getNode() {
+        return node;
     }
 
-    public void setGraphNode(GraphNode graphNode) {
-        this.graphNode = graphNode;
+    public void setNode(Node node) {
+        this.node = node;
     }
 }
