@@ -12,12 +12,25 @@ import java.util.regex.Pattern;
  */
 public class GraphTest {
     @Test
-    public void init() {
-        List<Node> nodeList = NetUtil.gainNet("/test/resource/node");
+    public void topology() {
+        List<Node> nodeList = NetUtil.gainNet("/test/resource/topologyNodes");
 
         System.out.println(Graph.topology(nodeList));
     }
 
+    @Test
+    public void dijkstra() {
+        Node start = getDijkstraNodes().get(0);
+        System.out.println(Graph.dijkstra(start));
+    }
+
+    public List<Node> getTopologyNodes() {
+        return NetUtil.gainNet("/test/resource/topologyNodes");
+    }
+
+    public List<Node> getDijkstraNodes() {
+        return NetUtil.gainNet("/test/resource/dijkstraNodes");
+    }
     @Test
     public void regexTest() {
         String str = "4U";

@@ -1,9 +1,6 @@
 package me.alfod.datastructure.graph;
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Arvin Alfod on 2017/8/20.
@@ -50,4 +47,50 @@ public class Graph {
             }
         }
     }
+
+    public static Set<Node> dijkstra(Node start) {
+        Set<Node> knownSets = new HashSet<>();
+        start.setDistance(0);
+        knownSets.add(start);
+        calculateDistance(start, knownSets);
+        return knownSets;
+    }
+
+    private static void calculateDistance(Node node, Set<Node> knowSet) {
+        if (node == null
+                || node.getLineList() == null
+                || node.getLineList().isEmpty()) {
+            return;
+        }
+
+
+        Collections.sort(node.getLineList());
+
+        int distance, sonDistance;
+        Node next = null;
+        for (Line line : node.getLineList()) {
+            if (!knowSet.contains(line.getNode())) {
+                if (next == null) {
+                    next = line.getNode();
+                }
+                System.out.println(node.getLineList());
+                distance = node.getDistance() + line.getWeight();
+                if (line.getNode().getDistance() == 0 || line.getNode().getDistance() > distance) {
+                    line.getNode().setDistance(distance);
+                }
+                knowSet.add(line.getNode());
+                for (Line sonLine : line.getNode().getLineList()) {
+                    sonDistance = line.getNode().getDistance() + sonLine.getWeight();
+                    if (!knowSet.contains(sonLine.getNode())
+                            && (sonLine.getNode().getDistance() == 0 || sonLine.getNode().getDistance() > sonDistance)) {
+                        sonLine.getNode().setDistance(sonDistance);
+                    }
+                }
+            }
+        }
+        if (next != null) {
+            calculateDistance(next, knowSet);
+        }
+    }
+
 }

@@ -27,7 +27,7 @@ public class Node {
     public String toString() {
         final StringBuilder sb = new StringBuilder("Node{");
         sb.append("name='").append(name).append('\'');
-        sb.append(", inDegree=").append(inDegree);
+        sb.append(", distance=").append(distance);
         sb.append('}');
         return sb.toString();
     }
